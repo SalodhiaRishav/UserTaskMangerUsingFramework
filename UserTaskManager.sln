@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskManager", "UserTaskManager\UserTaskManager.csproj", "{02CD0470-447A-4154-A4C5-FAD6C01391B7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.UserTaskManager.DAL", "1.UserTaskManager.DAL", "{9A88E43A-B1FD-4409-9F20-5C72BA8310E7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.UserTaskManager.BAL", "2.UserTaskManager.BAL", "{F05DC6F8-DC70-4189-9175-2EF79DD0F5DC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.UserTaskManager.Presentation", "3.UserTaskManager.Presentation", "{D515E976-16C1-43FB-9852-A412A4BBC718}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.UserTaskManager.Shared", "4.UserTaskManager.Shared", "{5122F5AD-5913-456E-B286-7CBA3DEB71E3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.UserTaskManager.Services", "5.UserTaskManager.Services", "{E20F9729-7C1D-4C11-87E6-BEFA8FA32CB3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.UserTaskManager.Services", "3.UserTaskManager.Services", "{E20F9729-7C1D-4C11-87E6-BEFA8FA32CB3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{85E7D215-9F6A-46CC-9A1C-67743F75D450}"
 EndProject
@@ -21,16 +17,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{CCBCF084-35F3-4C3C-A217-33261CE0DB8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskMangerAPI", "UserTaskMangerAPI\UserTaskMangerAPI\UserTaskMangerAPI.csproj", "{4389B305-B381-4B50-B1A8-BBB5259A0524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskMangerAPI.ServiceModel", "UserTaskMangerAPI\UserTaskMangerAPI.ServiceModel\UserTaskMangerAPI.ServiceModel.csproj", "{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskMangerAPI.ServiceInterface", "UserTaskMangerAPI\UserTaskMangerAPI.ServiceInterface\UserTaskMangerAPI.ServiceInterface.csproj", "{801A0F89-D5F6-49A6-BCEA-6624388C98A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskMangerAPI.Tests", "UserTaskMangerAPI\UserTaskMangerAPI.Tests\UserTaskMangerAPI.Tests.csproj", "{D22B5797-9F2A-4BA7-9636-6EFCE62EBE00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{02CD0470-447A-4154-A4C5-FAD6C01391B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02CD0470-447A-4154-A4C5-FAD6C01391B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02CD0470-447A-4154-A4C5-FAD6C01391B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02CD0470-447A-4154-A4C5-FAD6C01391B7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{85E7D215-9F6A-46CC-9A1C-67743F75D450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{85E7D215-9F6A-46CC-9A1C-67743F75D450}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85E7D215-9F6A-46CC-9A1C-67743F75D450}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,15 +43,34 @@ Global
 		{CCBCF084-35F3-4C3C-A217-33261CE0DB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBCF084-35F3-4C3C-A217-33261CE0DB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBCF084-35F3-4C3C-A217-33261CE0DB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4389B305-B381-4B50-B1A8-BBB5259A0524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D22B5797-9F2A-4BA7-9636-6EFCE62EBE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D22B5797-9F2A-4BA7-9636-6EFCE62EBE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D22B5797-9F2A-4BA7-9636-6EFCE62EBE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D22B5797-9F2A-4BA7-9636-6EFCE62EBE00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{02CD0470-447A-4154-A4C5-FAD6C01391B7} = {D515E976-16C1-43FB-9852-A412A4BBC718}
 		{85E7D215-9F6A-46CC-9A1C-67743F75D450} = {9A88E43A-B1FD-4409-9F20-5C72BA8310E7}
 		{799EC6F6-DBF2-4135-9528-B3C64848EFA0} = {F05DC6F8-DC70-4189-9175-2EF79DD0F5DC}
 		{CCBCF084-35F3-4C3C-A217-33261CE0DB8A} = {5122F5AD-5913-456E-B286-7CBA3DEB71E3}
+		{4389B305-B381-4B50-B1A8-BBB5259A0524} = {E20F9729-7C1D-4C11-87E6-BEFA8FA32CB3}
+		{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40} = {E20F9729-7C1D-4C11-87E6-BEFA8FA32CB3}
+		{801A0F89-D5F6-49A6-BCEA-6624388C98A4} = {E20F9729-7C1D-4C11-87E6-BEFA8FA32CB3}
+		{D22B5797-9F2A-4BA7-9636-6EFCE62EBE00} = {E20F9729-7C1D-4C11-87E6-BEFA8FA32CB3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B960CF6-A117-4919-B6D2-47AC52768CF3}

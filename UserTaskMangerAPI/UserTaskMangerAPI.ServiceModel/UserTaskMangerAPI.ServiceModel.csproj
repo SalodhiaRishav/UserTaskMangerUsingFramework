@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53E82AC1-DD1D-4C66-B55F-F9F4ACFB2F40}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UserTaskMangerAPI.ServiceModel</RootNamespace>
+    <AssemblyName>UserTaskMangerAPI.ServiceModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ServiceStack.Interfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ServiceStack.Interfaces.5.5.0\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskCategory\RequestDTOs\CreateTaskCategoryRequestDTO.cs" />
+    <Compile Include="TaskCategory\RequestDTOs\DeleteTaskCategoryRequestDTO.cs" />
+    <Compile Include="TaskCategory\RequestDTOs\GetAllTaskCategoriesRequestDTO.cs" />
+    <Compile Include="TaskCategory\RequestDTOs\GetTaskCategoryByIdRequestDTO.cs" />
+    <Compile Include="TaskCategory\ResponseDTOs\CreateTaskCategoryResponseDTO.cs" />
+    <Compile Include="TaskCategory\ResponseDTOs\DeleteTaskCategoryResponseDTO.cs" />
+    <Compile Include="TaskCategory\ResponseDTOs\GetAllTaskCategoriesResponseDTO.cs" />
+    <Compile Include="TaskCategory\ResponseDTOs\GetTaskCategoryByIdResponseDTO.cs" />
+    <Compile Include="Task\RequestDTOs\CreateTaskRequestDTO.cs" />
+    <Compile Include="Task\RequestDTOs\DeleteTaskRequestDTO.cs" />
+    <Compile Include="Task\RequestDTOs\GetAllTasksRequestDTO.cs" />
+    <Compile Include="Task\RequestDTOs\GetTaskByIdRequestDTO.cs" />
+    <Compile Include="Task\ResponseDTOs\CreateTaskResponseDTO.cs" />
+    <Compile Include="Task\ResponseDTOs\DeleteTaskResponseDTO.cs" />
+    <Compile Include="Task\ResponseDTOs\GetAllTasksResponseDTO.cs" />
+    <Compile Include="Task\ResponseDTOs\GetTaskByIdResponseDTO.cs" />
+    <Compile Include="User\RequestDTOs\CreateUserRequestDTO.cs" />
+    <Compile Include="User\RequestDTOs\DeleteUserRequestDTO.cs" />
+    <Compile Include="User\RequestDTOs\GetAllUsersRequestDTO.cs" />
+    <Compile Include="User\RequestDTOs\GetUserByIdRequestDTO.cs" />
+    <Compile Include="User\RequestDTOs\UpdateUserRequestDTO.cs" />
+    <Compile Include="User\ResponseDTOs\CreateUserResponseDTO.cs" />
+    <Compile Include="User\ResponseDTOs\DeleteUserResponseDTO.cs" />
+    <Compile Include="User\ResponseDTOs\GetAllUsersResponseDTO.cs" />
+    <Compile Include="User\ResponseDTOs\GetUserByIdResponseDTO.cs" />
+    <Compile Include="User\ResponseDTOs\UpdateUserResponseDTO.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.csproj">
+      <Project>{ccbcf084-35f3-4c3c-a217-33261ce0db8a}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

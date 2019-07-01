@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shared</RootNamespace>
     <AssemblyName>Shared</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +53,7 @@
     <Compile Include="DomainModels\Task.cs" />
     <Compile Include="DomainModels\TaskCategory.cs" />
     <Compile Include="DomainModels\User.cs" />
+    <Compile Include="Interfaces\BusinessLogicInterfaces\IUserBusinessLogic.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\ITaskCategoryRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\ITaskRepository.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Interfaces\UnitOfWorkInterfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\UnitOfWorkInterfaces\IUserUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\MessageFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
