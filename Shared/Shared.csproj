@@ -53,6 +53,8 @@
     <Compile Include="DomainModels\Task.cs" />
     <Compile Include="DomainModels\TaskCategory.cs" />
     <Compile Include="DomainModels\User.cs" />
+    <Compile Include="Interfaces\BusinessLogicInterfaces\ITaskBusinessLogic.cs" />
+    <Compile Include="Interfaces\BusinessLogicInterfaces\ITaskCategoryBusinessLogic.cs" />
     <Compile Include="Interfaces\BusinessLogicInterfaces\IUserBusinessLogic.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\IRepository.cs" />
     <Compile Include="Interfaces\RepositoryInterfaces\ITaskCategoryRepository.cs" />

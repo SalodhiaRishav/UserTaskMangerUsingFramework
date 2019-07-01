@@ -60,22 +60,91 @@ namespace BAL.BusinessLogics
 
         public MessageFormat<User> Delete(int id)
         {
-            throw new NotImplementedException();
+            MessageFormat<User> result = new MessageFormat<User>();
+            try
+            {
+                User user = this.UserRepository.FindById(id);
+                if (user == null)
+                {
+                    result.Message = "No task found with this id";
+                    result.Success = false;
+                    return result;
+                }
+                this.UserRepository.Delete(user);           
+                result.Message = "Deleted successfully";
+                result.Success = true;
+                return result;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public MessageFormat<List<User>> GetAll()
         {
-            throw new NotImplementedException();
+            MessageFormat<List<User>> result = new MessageFormat<List<User>>();
+            try
+            {
+                List<User> userList = this.UserRepository.List;
+                if (userList.Count == 0)
+                {
+                    result.Message = "Empty List";
+                    result.Success = false;
+                    return result;
+                }
+                result.Message = "Retrieved Successfully";
+                result.Success = true;
+                result.Data = userList;
+                return result;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public MessageFormat<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            MessageFormat<User> result = new MessageFormat<User>();
+            try
+            {
+                User user = this.UserRepository.FindById(id);
+                if (user == null)
+                {
+                    result.Message = "No task found with this id";
+                    result.Success = false;
+                    return result;
+                }
+              
+                result.Message = "Retrieved successfully";
+                result.Success = true;
+                result.Data = user;
+                return result;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
-        public MessageFormat<User> Update(User userDTO)
+        public MessageFormat<User> Update(User user)
         {
-            throw new NotImplementedException();
+            MessageFormat<User> result = new MessageFormat<User>();
+            user.ModifiedOn = DateTime.Now;
+            try
+            {
+               this.UserRepository.Update(user);                
+                result.Message = "Updated Successfully";
+                result.Data = user;
+                result.Success = true;
+                return result;
+
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
     }
 }

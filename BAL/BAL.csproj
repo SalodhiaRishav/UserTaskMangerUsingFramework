@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogics\TaskBusinessLogic.cs" />
+    <Compile Include="BusinessLogics\TaskCategoryBusinessLogic.cs" />
     <Compile Include="BusinessLogics\UserBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
