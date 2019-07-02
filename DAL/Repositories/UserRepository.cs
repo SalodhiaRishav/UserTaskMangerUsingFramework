@@ -13,12 +13,8 @@ namespace DAL.Repositories
 {
    public class UserRepository : BaseRepository<User>,IUserRepository
     {
-        public IUserUnitOfWork UserUnitOfWork;
-        public DbSet<User> DbSet;
         public UserRepository(IUserUnitOfWork userUnitOfWork) : base(userUnitOfWork)
-        {
-            UserUnitOfWork = userUnitOfWork;
-            DbSet = UserUnitOfWork.TaskManagerDBContext.Set<User>();
+        {      
         }
 
         public User GetUserWithTasks(int id)
