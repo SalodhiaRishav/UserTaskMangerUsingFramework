@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using Shared.DomainModels;
 using Shared.Interfaces.BusinessLogicInterfaces;
 using Shared.Interfaces.RepositoryInterfaces;
 using Shared.Utils;
+using Shared.Validators;
 
 namespace BAL.BusinessLogics
 {
@@ -22,6 +24,16 @@ namespace BAL.BusinessLogics
             user.CreatedOn = DateTime.Now;
             user.ModifiedOn = DateTime.Now;
             MessageFormat<User> result = new MessageFormat<User>();
+            UserValidator userValidator = new UserValidator();
+            ValidationResult validationResult = userValidator.Validate(user);
+            if (!validationResult.IsValid)
+            {
+                result.Success = false;
+                result.Errors = validationResult.Errors;
+                result.Message = "Invalid Data";
+                return result;
+            }
+           
             try
             {
                 var userList = UserRepository.List;
@@ -131,6 +143,15 @@ namespace BAL.BusinessLogics
         public MessageFormat<User> Update(User user)
         {
             MessageFormat<User> result = new MessageFormat<User>();
+            UserValidator userValidator = new UserValidator();
+            ValidationResult validationResult = userValidator.Validate(user);
+            if (!validationResult.IsValid)
+            {
+                result.Success = false;
+                result.Errors = validationResult.Errors;
+                result.Message = "Invalid Data";
+                return result;
+            }
             user.ModifiedOn = DateTime.Now;
             try
             {

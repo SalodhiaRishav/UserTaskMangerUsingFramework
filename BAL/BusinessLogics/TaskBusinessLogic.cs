@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DAL.Repositories;
+using FluentValidation.Results;
 using Shared.DomainModels;
 using Shared.Interfaces.BusinessLogicInterfaces;
 using Shared.Utils;
-
+using Shared.Validators;
 
 namespace BAL.BusinessLogics
 {
@@ -20,6 +21,15 @@ namespace BAL.BusinessLogics
         public MessageFormat<Shared.DomainModels.Task> Add(Shared.DomainModels.Task task)
         {
             MessageFormat<Task> result = new MessageFormat<Task>();
+            TaskValidator taskValidator = new TaskValidator();
+            ValidationResult validationResult = taskValidator.Validate(task);
+            if (!validationResult.IsValid)
+            {
+                result.Success = false;
+                result.Errors = validationResult.Errors;
+                result.Message = "Invalid Data";
+                return result;
+            }
             task.CreatedOn = DateTime.Now;
             task.ModifiedOn = DateTime.Now;
             try
@@ -108,6 +118,15 @@ namespace BAL.BusinessLogics
         public MessageFormat<Shared.DomainModels.Task> Update(Shared.DomainModels.Task task)
         {
             MessageFormat<Task> result = new MessageFormat<Task>();
+            TaskValidator taskValidator = new TaskValidator();
+            ValidationResult validationResult = taskValidator.Validate(task);
+            if (!validationResult.IsValid)
+            {
+                result.Success = false;
+                result.Errors = validationResult.Errors;
+                result.Message = "Invalid Data";
+                return result;
+            }
             task.ModifiedOn = DateTime.Now;
             try
             {

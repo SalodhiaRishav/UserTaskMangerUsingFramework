@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Repositories;
+using FluentValidation.Results;
 using Shared.DomainModels;
 using Shared.Interfaces.BusinessLogicInterfaces;
 using Shared.Utils;
+using Shared.Validators;
 
 namespace BAL.BusinessLogics
 {
@@ -20,6 +22,15 @@ namespace BAL.BusinessLogics
         public MessageFormat<TaskCategory> Add(TaskCategory taskCategory)
         {
             MessageFormat<TaskCategory> result = new MessageFormat<TaskCategory>();
+            TaskCategoryValidator taskCategoryValidator = new TaskCategoryValidator();
+            ValidationResult validationResult = taskCategoryValidator.Validate(taskCategory);
+            if (!validationResult.IsValid)
+            {
+                result.Success = false;
+                result.Errors = validationResult.Errors;
+                result.Message = "Invalid Data";
+                return result;
+            }
             taskCategory.CreatedOn = DateTime.Now;
             taskCategory.ModifiedOn = DateTime.Now;
             try
@@ -108,6 +119,15 @@ namespace BAL.BusinessLogics
         public MessageFormat<TaskCategory> Update(TaskCategory taskCategory)
         {
             MessageFormat<TaskCategory> result = new MessageFormat<TaskCategory>();
+            TaskCategoryValidator taskCategoryValidator = new TaskCategoryValidator();
+            ValidationResult validationResult = taskCategoryValidator.Validate(taskCategory);
+            if (!validationResult.IsValid)
+            {
+                result.Success = false;
+                result.Errors = validationResult.Errors;
+                result.Message = "Invalid Data";
+                return result;
+            }
             taskCategory.ModifiedOn = DateTime.Now;
             try
             {

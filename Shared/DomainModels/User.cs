@@ -17,7 +17,9 @@ namespace Shared.DomainModels
 
         [Required]
         public string Password { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public ICollection<Task> Tasks { get; set; }
     }
 }
