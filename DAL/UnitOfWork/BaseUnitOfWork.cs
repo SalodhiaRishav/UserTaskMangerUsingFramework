@@ -12,13 +12,14 @@ namespace DAL.UnitOfWork
 {
     public class BaseUnitOfWork : IUnitOfWork
     {
-        public DbContext TaskManagerDBContext { get { return new TaskManagerDBContext(); } }
-
+        private readonly TaskManagerDBContext DbContext;
         public BaseUnitOfWork()
-        {        
+        {
+            DbContext = new TaskManagerDBContext();
         }
 
-        
+        public DbContext TaskManagerDBContext { get { return DbContext; } }
+
 
 
         public bool Commit()

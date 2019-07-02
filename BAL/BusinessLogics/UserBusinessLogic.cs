@@ -109,7 +109,7 @@ namespace BAL.BusinessLogics
             MessageFormat<User> result = new MessageFormat<User>();
             try
             {
-                User user = this.UserRepository.FindById(id);
+                User user = this.UserRepository.GetUserWithTasks(id);
                 if (user == null)
                 {
                     result.Message = "No task found with this id";

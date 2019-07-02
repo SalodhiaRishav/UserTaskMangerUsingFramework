@@ -9,7 +9,7 @@ using ServiceStack.ServiceHost;
 
 namespace UserTaskManger.ServiceModel.TaskCategory.RequestDTOs
 {
-    [Route("/task/{Id}","GET")]
+    [Route("/taskcategory/{Id}","GET")]
     public class GetTaskCategoryByIdRequestDTO
     {
         public int Id { get; set; }

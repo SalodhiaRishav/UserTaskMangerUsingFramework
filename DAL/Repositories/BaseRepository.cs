@@ -7,26 +7,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Interfaces.RepositoryInterfaces;
 using Shared.Interfaces.UnitOfWorkInterfaces;
+using DAL.DatabaseConfigurations;
 
 namespace DAL.Repositories
 {
-   public class BaseRepository<T>:IRepository<T> where T :class
+    public class BaseRepository<T> : IRepository<T> where T : class
     {
-        IUnitOfWork UnitOfWork;
+        public IUnitOfWork UnitOfWork;
         public DbSet<T> DbSet;
 
         public BaseRepository(IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
             DbSet = UnitOfWork.TaskManagerDBContext.Set<T>();
+          
+
         }
         public List<T> List { get => DbSet.ToList(); }
 
         public bool Add(T entity)
         {
-            DbSet.Add(entity);
+            DbSet.Add(entity);          
+           UnitOfWork.TaskManagerDBContext.SaveChanges();
             bool isCommited = UnitOfWork.Commit();
-            return isCommited;
+            return true;
 
         }
 

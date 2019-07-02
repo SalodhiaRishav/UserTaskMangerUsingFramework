@@ -26,9 +26,15 @@ namespace UserTaskMangerAPI
         /// </summary>
         public override void Configure(Container container)
         {
-            container.Register<IUnitOfWork>(new UserUnitOfWork());
+            container.Register<IUserUnitOfWork>(new UserUnitOfWork());
             container.Register<IUserRepository>(new UserRepository(new UserUnitOfWork()));
             container.Register<IUserBusinessLogic>(new UserBusinessLogic(new UserRepository(new UserUnitOfWork())));
+            container.Register<ITaskUnitOfWork>(new TaskUnitOfWork());
+            container.Register<ITaskRepository>(new TaskRepository(new TaskUnitOfWork()));
+            container.Register<ITaskBusinessLogic>(new TaskBusinessLogic(new TaskRepository(new TaskUnitOfWork())));
+            container.Register<ITaskCategoryUnitOfWork>(new TaskCategoryUnitOfWork());
+            container.Register<ITaskCategoryRepository>(new TaskCategoryRepository(new TaskCategoryUnitOfWork()));
+            container.Register<ITaskCategoryBusinessLogic>(new TaskCategoryBusinessLogic(new TaskCategoryRepository(new TaskCategoryUnitOfWork())));
             //container.AddSingleton<IUserBusinessLogic, UserBusinessLogic>();
             //container.AddSingleton<IUserUnitOfWork, UserUnitOfWork>();
             //container.AddSingleton<IUserRepository, UserRepository>();
