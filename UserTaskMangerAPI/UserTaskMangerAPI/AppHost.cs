@@ -3,6 +3,7 @@ using DAL.Repositories;
 using DAL.UnitOfWork;
 using Funq;
 using ServiceStack;
+using ServiceStack.WebHost.Endpoints;
 using Shared.Interfaces.BusinessLogicInterfaces;
 using Shared.Interfaces.RepositoryInterfaces;
 using Shared.Interfaces.UnitOfWorkInterfaces;
@@ -25,16 +26,20 @@ namespace UserTaskMangerAPI
         /// </summary>
         public override void Configure(Container container)
         {
-            //Config examples
-            //container.AddTransient<ITaskRepository, TaskRepository>();
-            //services.AddTransient<ITaskBusinessLogic, TaskBusinessLogic>();
-            //services.AddTransient<IUserRepository, UserRepository>();
-            //services.AddTransient<IUserBusinessLogic, UserBusinessLogic>();
-            container.AddSingleton<IUserBusinessLogic, UserBusinessLogic>();
-            container.AddSingleton<IUserUnitOfWork, UserUnitOfWork>();
-            container.AddSingleton<IUserRepository, UserRepository>();
-            this.Plugins.Add(new PostmanFeature());
-            this.Plugins.Add(new CorsFeature());
+            container.Register<IUnitOfWork>(new UserUnitOfWork());
+            container.Register<IUserRepository>(new UserRepository(new UserUnitOfWork()));
+            container.Register<IUserBusinessLogic>(new UserBusinessLogic(new UserRepository(new UserUnitOfWork())));
+            //container.AddSingleton<IUserBusinessLogic, UserBusinessLogic>();
+            //container.AddSingleton<IUserUnitOfWork, UserUnitOfWork>();
+            //container.AddSingleton<IUserRepository, UserRepository>();
+            //container.AddSingleton<ITaskBusinessLogic, TaskBusinessLogic>();
+            //container.AddSingleton<ITaskUnitOfWork, TaskUnitOfWork>();
+            //container.AddSingleton<ITaskRepository, TaskRepository>();
+            //container.AddSingleton<ITaskCategoryBusinessLogic, TaskCategoryBusinessLogic>();
+            //container.AddSingleton<ITaskCategoryUnitOfWork, TaskCategoryUnitOfWork>();
+            //container.AddSingleton<ITaskCategoryRepository, TaskCategoryRepository>();
+            //this.Plugins.Add(new PostmanFeature());
+            //this.Plugins.Add(new CorsFeature());
         }
     }
 }
