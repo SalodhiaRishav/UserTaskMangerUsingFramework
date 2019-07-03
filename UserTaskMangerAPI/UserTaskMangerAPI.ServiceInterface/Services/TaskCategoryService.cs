@@ -70,5 +70,17 @@ namespace UserTaskManger.ServiceInterface.Services
                 throw exception;
             }
         }
+        public object Put(UpdateTaskCategoryRequestDTO updateTaskCategoryRequestDTO)
+        {
+            try
+            {
+                MessageFormat<TaskCategory> result = this.TaskCategoryBusinessLogic.Update(updateTaskCategoryRequestDTO.TaskCategory);
+                return new UpdateTaskCategoryResponseDTO { Result = result };
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
     }
 }

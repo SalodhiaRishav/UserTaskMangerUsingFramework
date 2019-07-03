@@ -7,7 +7,7 @@ using Shared.Utils;
 
 namespace UserTaskManger.ServiceModel.Task.ResponseDTOs
 {
-    public class GetTaskCategoryByIdResponseDTO
+    public class GetTaskByIdResponseDTO
     {
        public MessageFormat<Shared.DomainModels.Task> Result { get; set; }
     }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ServiceStack.ServiceHost;
 
-namespace UserTaskManger.ServiceModel.RequestDTO.UserRequestDTOs
+namespace UserTaskManger.ServiceModel.User.RequestDTOs
 {
-    class UpdateUserRequestDTO
+    [Route("/user", "PUT")]
+    public class UpdateUserRequestDTO
     {
+        public Shared.DomainModels.User User { get; set; }
     }
 }

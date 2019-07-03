@@ -50,7 +50,20 @@ namespace UserTaskManger.ServiceInterface.Services
             try
             {
                 MessageFormat<List<Task>> result = this.TaskBusinessLogic.GetAll();
-                return new GetAllTaskCategoriesResponseDTO { Result = result };
+                return new GetAllTasksResponseDTO { Result = result };
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+        public object Put(UpdateTaskRequestDTO updateTaskRequestDTO)
+        {
+            try
+            {
+                MessageFormat<Task> result = this.TaskBusinessLogic.Update(updateTaskRequestDTO.Task);
+                return new UpdateTaskResponseDTO { Result = result };
             }
             catch (Exception exception)
             {
@@ -63,7 +76,7 @@ namespace UserTaskManger.ServiceInterface.Services
             try
             {
                 MessageFormat<Task> result = this.TaskBusinessLogic.GetById(getTaskByIdRequestDTO.Id);
-                return new GetTaskCategoryByIdResponseDTO { Result = result };
+                return new GetTaskByIdResponseDTO { Result = result };
             }
             catch (Exception exception)
             {

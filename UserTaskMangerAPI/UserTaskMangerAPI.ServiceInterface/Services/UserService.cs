@@ -69,5 +69,18 @@ namespace UserTaskManger.ServiceInterface.Services
                 throw exception;
             }
         }
+
+        public object Put(UpdateUserRequestDTO updateUserRequestDTO)
+        {
+            try
+            {
+                MessageFormat<User> result = this.UserBusinessLogic.Update(updateUserRequestDTO.User);
+                return new UpdateUserResponseDTO { Result = result };
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
     }
 }

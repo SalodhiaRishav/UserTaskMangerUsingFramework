@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Interfaces.RepositoryInterfaces;
 using Shared.Interfaces.UnitOfWorkInterfaces;
+using System.Data.Entity.Migrations;
 using DAL.DatabaseConfigurations;
 
 namespace DAL.Repositories
@@ -65,7 +66,8 @@ namespace DAL.Repositories
 
         public bool Update(T entity)
         {
-            UnitOfWork.TaskManagerDBContext.Entry(entity).State = EntityState.Modified;
+            DbSet.AddOrUpdate(entity);            
+           // UnitOfWork.TaskManagerDBContext.Entry(entity).State = EntityState.Modified;
             bool isComitted = UnitOfWork.Commit();
             return isComitted;
         }

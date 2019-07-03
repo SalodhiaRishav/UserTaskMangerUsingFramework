@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Shared;
+using System.Threading.Tasks;
 using Shared.Utils;
-
 
 namespace UserTaskManger.ServiceModel.Task.ResponseDTOs
 {
-    public class DeleteTaskResponseDTO
+    public class UpdateTaskResponseDTO
     {
         public MessageFormat<Shared.DomainModels.Task> Result { get; set; }
     }
