@@ -49,10 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseConfigurations\EntityConfigurations\TaskCategoryEntityConfiguration.cs" />
+    <Compile Include="DatabaseConfigurations\EntityConfigurations\TaskEntityConfiguration.cs" />
+    <Compile Include="DatabaseConfigurations\EntityConfigurations\UserEntityConfiguration.cs" />
     <Compile Include="DatabaseConfigurations\TaskManagerDBContext.cs" />
     <Compile Include="Migrations\201907010648196_InitialCreate.cs" />
     <Compile Include="Migrations\201907010648196_InitialCreate.Designer.cs">
       <DependentUpon>201907010648196_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907030914254_AddedfluentApi.cs" />
+    <Compile Include="Migrations\201907030914254_AddedfluentApi.Designer.cs">
+      <DependentUpon>201907030914254_AddedfluentApi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907030920095_AddedfluentApi2.cs" />
+    <Compile Include="Migrations\201907030920095_AddedfluentApi2.Designer.cs">
+      <DependentUpon>201907030920095_AddedfluentApi2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +83,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907010648196_InitialCreate.resx">
       <DependentUpon>201907010648196_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907030914254_AddedfluentApi.resx">
+      <DependentUpon>201907030914254_AddedfluentApi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907030920095_AddedfluentApi2.resx">
+      <DependentUpon>201907030920095_AddedfluentApi2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

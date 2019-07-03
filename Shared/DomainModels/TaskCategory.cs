@@ -7,8 +7,6 @@ namespace Shared.DomainModels
 {
     public class TaskCategory : BaseDomain
     {
-        [Required]
         public string CategoryName { get; set; }
-
     }
 }

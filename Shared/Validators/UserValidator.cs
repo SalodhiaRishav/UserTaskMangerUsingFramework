@@ -12,9 +12,9 @@ namespace Shared.Validators
     {
         public UserValidator()
         {
-            RuleFor(user => user.FirstName).NotNull().NotEmpty().Length(1,15);
-            RuleFor(user => user.LastName).NotNull().NotEmpty().Length(1, 15);
-            RuleFor(user => user.Password).NotNull().NotEmpty().Length(1, 15);
+            RuleFor(user => user.FirstName).NotNull().NotEmpty().Length(1,20);
+            RuleFor(user => user.LastName).NotNull().NotEmpty().Length(1, 20);
+            RuleFor(user => user.Password).NotNull().NotEmpty().Length(1, 20);
             RuleFor(user => user.Email).EmailAddress();
         }
     }
