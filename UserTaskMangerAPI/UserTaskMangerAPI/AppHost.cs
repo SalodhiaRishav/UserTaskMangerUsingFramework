@@ -3,6 +3,7 @@ using DAL.Repositories;
 using DAL.UnitOfWork;
 using Funq;
 using ServiceStack;
+using ServiceStack.ServiceInterface.Cors;
 using ServiceStack.WebHost.Endpoints;
 using Shared.Interfaces.BusinessLogicInterfaces;
 using Shared.Interfaces.RepositoryInterfaces;
@@ -35,17 +36,19 @@ namespace UserTaskMangerAPI
             container.Register<ITaskCategoryUnitOfWork>(new TaskCategoryUnitOfWork());
             container.Register<ITaskCategoryRepository>(new TaskCategoryRepository(new TaskCategoryUnitOfWork()));
             container.Register<ITaskCategoryBusinessLogic>(new TaskCategoryBusinessLogic(new TaskCategoryRepository(new TaskCategoryUnitOfWork())));
-            //container.AddSingleton<IUserBusinessLogic, UserBusinessLogic>();
-            //container.AddSingleton<IUserUnitOfWork, UserUnitOfWork>();
-            //container.AddSingleton<IUserRepository, UserRepository>();
-            //container.AddSingleton<ITaskBusinessLogic, TaskBusinessLogic>();
-            //container.AddSingleton<ITaskUnitOfWork, TaskUnitOfWork>();
-            //container.AddSingleton<ITaskRepository, TaskRepository>();
-            //container.AddSingleton<ITaskCategoryBusinessLogic, TaskCategoryBusinessLogic>();
-            //container.AddSingleton<ITaskCategoryUnitOfWork, TaskCategoryUnitOfWork>();
-            //container.AddSingleton<ITaskCategoryRepository, TaskCategoryRepository>();
-            //this.Plugins.Add(new PostmanFeature());
-            //this.Plugins.Add(new CorsFeature());
+           
+            //  this.Plugins.Add(new PostmanFeature());
+            this.Plugins.Add(new CorsFeature());
+            RequestFilters.Add((httpReq, httpRes, requestDto) =>
+            {
+                if (httpReq.HttpMethod == "OPTIONS")
+                {
+                    httpRes.AddHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+                    httpRes.AddHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, X-ApiKey");
+                    httpRes.EndRequest();
+                }
+
+            });
         }
     }
 }
