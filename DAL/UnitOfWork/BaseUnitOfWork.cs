@@ -1,39 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.DatabaseConfigurations;
-using Shared.Interfaces.UnitOfWorkInterfaces;
-
-namespace DAL.UnitOfWork
+﻿namespace DAL.UnitOfWork
 {
+    using System;
+    using System.Data.Entity;
+    using DAL.DatabaseConfigurations;
+    using Shared.Interfaces.UnitOfWorkInterfaces;
+
     public class BaseUnitOfWork : IUnitOfWork
     {
         private readonly TaskManagerDBContext DbContext;
+        public DbContext TaskManagerDBContext { get { return DbContext; } }
         public BaseUnitOfWork()
         {
             DbContext = new TaskManagerDBContext();
         }
 
-        public DbContext TaskManagerDBContext { get { return DbContext; } }
-
-
-
-        public bool Commit()
+        public void Commit()
         {
             try
             {
-                int savedChanges = TaskManagerDBContext.SaveChanges();
+                TaskManagerDBContext.SaveChanges();
             }
             catch (Exception exception)
             {
                 throw exception;
             }
-
-            return true;
         }
     }
 }

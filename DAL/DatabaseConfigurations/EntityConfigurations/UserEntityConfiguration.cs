@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.DomainModels;
-
-namespace DAL.DatabaseConfigurations.EntityConfigurations
+﻿namespace DAL.DatabaseConfigurations.EntityConfigurations
 {
+    using System.Data.Entity.ModelConfiguration;
+    using Shared.DomainModels;
+
     public class UserEntityConfiguration : EntityTypeConfiguration<User>
     {
         public UserEntityConfiguration()
         {
-            this.HasKey<int>(user => user.ID);
+            this.HasKey<int>(user => user.Id);
 
             this.Property(user => user.FirstName)
                 .HasMaxLength(20)
@@ -29,7 +24,6 @@ namespace DAL.DatabaseConfigurations.EntityConfigurations
             this.HasIndex(user => user.Email)
             .IsUnique();
             
-
             this.Property(user => user.Password)
               .HasMaxLength(20)
               .IsRequired();

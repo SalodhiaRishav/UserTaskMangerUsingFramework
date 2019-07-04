@@ -1,11 +1,7 @@
-﻿using ServiceStack;
-
-using UserTaskManger.ServiceModel.User.ResponseDTOs;
-using ServiceStack.ServiceHost;
-
-
-namespace UserTaskManger.ServiceModel.User.RequestDTOs
+﻿namespace UserTaskManger.ServiceModel.User.RequestDTOs
 {
+    using ServiceStack.ServiceHost;
+
     [Route("/user/{Id}","GET")]
     public class GetUserByIdRequestDTO 
     {

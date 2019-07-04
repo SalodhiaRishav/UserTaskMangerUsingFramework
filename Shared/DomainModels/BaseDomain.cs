@@ -9,13 +9,10 @@ namespace Shared.DomainModels
 {
    public class BaseDomain
     {
-        [Required]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        [Required]
         public DateTime ModifiedOn { get; set; }
 
-        [Required]
         public DateTime CreatedOn { get; set; }
     }
 }

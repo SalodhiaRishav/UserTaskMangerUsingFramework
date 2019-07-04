@@ -10,6 +10,6 @@ namespace Shared.Interfaces.UnitOfWorkInterfaces
     public interface IUnitOfWork
     {
         DbContext TaskManagerDBContext { get; }
-        bool Commit();
+        void Commit();
     }
 }

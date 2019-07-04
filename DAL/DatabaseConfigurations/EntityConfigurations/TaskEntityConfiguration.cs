@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using Shared.DomainModels;
-
-namespace DAL.DatabaseConfigurations.EntityConfigurations
+﻿namespace DAL.DatabaseConfigurations.EntityConfigurations
 {
+    using System.Data.Entity.ModelConfiguration;
+    using Shared.DomainModels;
+
     public class TaskEntityConfiguration : EntityTypeConfiguration<Task>
     {
         public TaskEntityConfiguration()
         {
-            this.HasKey<int>(task => task.ID);
+            this.HasKey<int>(task => task.Id);
 
             this.Property(task => task.TimeSpent)             
                 .IsRequired();

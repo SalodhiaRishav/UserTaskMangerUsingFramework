@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.Interfaces.RepositoryInterfaces;
-using Shared.Interfaces.UnitOfWorkInterfaces;
-using System.Data.Entity.Migrations;
-using DAL.DatabaseConfigurations;
-
-namespace DAL.Repositories
+﻿namespace DAL.Repositories
 {
-    public class BaseRepository<T> : IRepository<T> where T : class
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using Shared.DomainModels;
+    using Shared.Interfaces.RepositoryInterfaces;
+    using Shared.Interfaces.UnitOfWorkInterfaces;
+
+    public class BaseRepository<T> : IRepository<T> where T : BaseDomain
     {
         public IUnitOfWork UnitOfWork;
         public DbSet<T> DbSet;
@@ -21,31 +19,33 @@ namespace DAL.Repositories
         {
             UnitOfWork = unitOfWork;
             DbSet = UnitOfWork.TaskManagerDBContext.Set<T>();
-          
-
         }
         public List<T> List { get => DbSet.ToList(); }
 
-        public bool Add(T entity)
+        public void Add(T entity)
         {
-            DbSet.Add(entity);          
-           UnitOfWork.TaskManagerDBContext.SaveChanges();
-            bool isCommited = UnitOfWork.Commit();
-            return true;
-
+            entity.ModifiedOn = DateTime.Now;
+            entity.CreatedOn = DateTime.Now;
+            DbSet.Add(entity);
+            UnitOfWork.TaskManagerDBContext.SaveChanges();
+            UnitOfWork.Commit();           
         }
 
         public void AddRange(IEnumerable<T> entityList)
         {
+            foreach(var item in entityList)
+            {
+                item.CreatedOn = DateTime.Now;
+                item.ModifiedOn = DateTime.Now;
+            }
             DbSet.AddRange(entityList);
             UnitOfWork.Commit();
         }
 
-        public bool Delete(T entity)
+        public void Delete(T entity)
         {
             DbSet.Remove(entity);
-            bool isCommited = UnitOfWork.Commit();
-            return isCommited;
+            UnitOfWork.Commit();
         }
 
         public void DeleteRange(IEnumerable<T> entityList)
@@ -64,12 +64,11 @@ namespace DAL.Repositories
             return DbSet.Find(Id);
         }
 
-        public bool Update(T entity)
+        public void Update(T entity)
         {
-            DbSet.AddOrUpdate(entity);            
-           // UnitOfWork.TaskManagerDBContext.Entry(entity).State = EntityState.Modified;
-            bool isComitted = UnitOfWork.Commit();
-            return isComitted;
+            entity.ModifiedOn = DateTime.Now;
+            DbSet.AddOrUpdate(entity);
+            UnitOfWork.Commit();
         }
     }
 }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using DAL.DatabaseConfigurations.EntityConfigurations;
-using Shared.DomainModels;
-
-namespace DAL.DatabaseConfigurations
+﻿namespace DAL.DatabaseConfigurations
 {
+    using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
+    using DAL.DatabaseConfigurations.EntityConfigurations;
+    using Shared.DomainModels;
+
     public class TaskManagerDBContext : DbContext
     {
         public TaskManagerDBContext() : base("TaskManagerDBConnectionString")
@@ -25,8 +21,6 @@ namespace DAL.DatabaseConfigurations
             modelBuilder.Configurations.Add(new UserEntityConfiguration());
             modelBuilder.Configurations.Add(new TaskEntityConfiguration());
             modelBuilder.Configurations.Add(new TaskCategoryEntityConfiguration());
-
-
         }
     }
 }

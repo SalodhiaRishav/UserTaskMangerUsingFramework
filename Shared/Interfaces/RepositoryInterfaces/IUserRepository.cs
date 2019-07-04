@@ -10,7 +10,6 @@ namespace Shared.Interfaces.RepositoryInterfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        User GetUserWithTasks(int id);
-        
+           
     }
 }
