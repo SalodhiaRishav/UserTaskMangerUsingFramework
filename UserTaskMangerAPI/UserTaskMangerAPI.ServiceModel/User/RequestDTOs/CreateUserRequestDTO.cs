@@ -1,13 +1,11 @@
-﻿using ServiceStack;
-using ServiceStack.ServiceHost;
-
-using UserTaskManger.ServiceModel.User.ResponseDTOs;
-
-namespace UserTaskManger.ServiceModel.User.RequestDTOs
+﻿namespace UserTaskMangerAPI.ServiceModel.User.RequestDTOs
 {
+    using ServiceStack.ServiceHost;
+    using Shared.Utils;
+
     [Route("/user", "POST")]
-    public class CreateUserRequestDTO 
+    public class CreateUserRequestDTO : IReturn<OperationResult<Shared.DomainModels.User>>
     {
-        public Shared.DomainModels.User User{ get; set; }
+        public Shared.DomainModels.User User { get; set; }
     }
 }

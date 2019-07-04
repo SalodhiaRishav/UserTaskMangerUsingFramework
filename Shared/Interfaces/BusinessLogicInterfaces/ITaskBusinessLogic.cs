@@ -9,10 +9,10 @@ namespace Shared.Interfaces.BusinessLogicInterfaces
 {
    public interface ITaskBusinessLogic
     {
-        MessageFormat<Task> Add(Task task);
-        MessageFormat<List<Task>> GetAll();
-        MessageFormat<Task> GetById(int id);
-        MessageFormat<Task> Delete(int id);
-        MessageFormat<Task> Update(Task task);
+        OperationResult<Task> AddTask(Task task);
+        OperationResult<List<Task>> GetAllTasks();
+        OperationResult<List<Task>> GetTasksForUserId(int userId);
+        OperationResult<Task> DeleteTask(int taskId);
+        OperationResult<Task> UpdateTask(Task task);
     }
 }

@@ -1,145 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DAL.Repositories;
-using FluentValidation.Results;
-using Shared.DomainModels;
-using Shared.Interfaces.BusinessLogicInterfaces;
-using Shared.Utils;
-using Shared.Validators;
-
-namespace BAL.BusinessLogics
+﻿namespace BAL.BusinessLogics
 {
-    public class TaskBusinessLogic : ITaskBusinessLogic
+    using System;
+    using System.Collections.Generic;
+    using DAL.Repositories;
+    using FluentValidation.Results;
+    using Shared.DomainModels;
+    using Shared.Interfaces.BusinessLogicInterfaces;
+    using Shared.Utils;
+    using Shared.Validators;
+
+    public class TaskBusinessLogic : BaseBusinessLogic, ITaskBusinessLogic
     {
         public TaskRepository TaskRepository;
         public TaskBusinessLogic(TaskRepository taskRepository)
         {
             TaskRepository = taskRepository;
         }
-        public MessageFormat<Shared.DomainModels.Task> Add(Shared.DomainModels.Task task)
+        public OperationResult<Task> AddTask(Task task)
         {
-            MessageFormat<Task> result = new MessageFormat<Task>();
             TaskValidator taskValidator = new TaskValidator();
             ValidationResult validationResult = taskValidator.Validate(task);
             if (!validationResult.IsValid)
             {
-                result.Success = false;
-                result.Errors = validationResult.Errors;
-                result.Message = "Invalid Data";
-                return result;
+                return CreateFailureMessage<Task>("Invalid Data", validationResult.Errors);
             }
-            task.CreatedOn = DateTime.Now;
-            task.ModifiedOn = DateTime.Now;
             try
             {
-                this.TaskRepository.Add(task);           
-                result.Data = task;
-                result.Message = "Added successfully";
-                result.Success = true;
-                return result;
+                this.TaskRepository.Add(task);
+                return CreateSuccessMessage<Task>("Task Added Successully", task);
             }
             catch (Exception exception)
             {
-                throw exception;
+                return CreateFailureMessage<Task>(exception.Message, null);
             }
         }
 
-        public MessageFormat<Shared.DomainModels.Task> Delete(int id)
+        public OperationResult<Task> DeleteTask(int taskId)
         {
-            MessageFormat<Task> result = new MessageFormat<Task>();
             try
             {
-                Task task = this.TaskRepository.FindById(id);
+                Task task = this.TaskRepository.FindById(taskId);
                 if (task == null)
                 {
-                    result.Message = "No task found with this id";
-                    result.Success = false;
-                    return result;
+                    return CreateFailureMessage<Task>("No task found with this id", null);
                 }
                 this.TaskRepository.Delete(task);
-                result.Message = "Deleted Successfully";
-                result.Success = true;
-                return result;
+                return CreateSuccessMessage<Task>("Task Deleted Successfully", null);
             }
             catch (Exception exception)
             {
-                throw exception;
+                return CreateFailureMessage<Task>(exception.Message, null);
             }
         }
 
-        public MessageFormat<List<Shared.DomainModels.Task>> GetAll()
+        public OperationResult<List<Shared.DomainModels.Task>> GetAllTasks()
         {
-            MessageFormat<List<Task>> result = new MessageFormat<List<Task>>();
             try
             {
                 List<Task> taskList = this.TaskRepository.List;
                 if (taskList.Count == 0)
                 {
-                    result.Message = "Empty List";
-                    result.Success = false;
-                    return result;
+                    return CreateFailureMessage<List<Task>>("Empty tasks", null);
                 }
-                result.Message = "Retrieved Successfully";
-                result.Success = true;
-                result.Data = taskList;
-                return result;
+                return CreateSuccessMessage<List<Task>>("Tasks retrieved successfully", taskList);
             }
             catch (Exception exception)
             {
-                throw exception;
+                return CreateFailureMessage<List<Task>>(exception.Message, null);
             }
         }
 
-        public MessageFormat<Shared.DomainModels.Task> GetById(int id)
+        public OperationResult<List<Task>> GetTasksForUserId(int userId)
         {
-            MessageFormat<Task> result = new MessageFormat<Task>();
             try
             {
-               Task task = this.TaskRepository.FindById(id);
-                if (task == null)
+                List<Task> tasks = this.TaskRepository.Find(task => task.UserID == userId);
+                if (tasks.Count==0)
                 {
-                    result.Message = "No task found with this id";
-                    result.Success = false;
-                    return result;
+                    return CreateFailureMessage<List<Task>>("Not any task found for this user", null);
                 }
-                result.Message = "Retrieved Successfully";
-                result.Data = task;
-                result.Success = true;
-                return result;
+                return CreateSuccessMessage<List<Task>>("Tasks retrieved successfully", tasks);            
             }
             catch (Exception exception)
             {
-                throw exception;
+                return CreateFailureMessage<List<Task>>(exception.Message, null);
             }
         }
 
-        public MessageFormat<Shared.DomainModels.Task> Update(Shared.DomainModels.Task task)
+        public OperationResult<Task> UpdateTask(Task task)
         {
-            MessageFormat<Task> result = new MessageFormat<Task>();
             TaskValidator taskValidator = new TaskValidator();
             ValidationResult validationResult = taskValidator.Validate(task);
             if (!validationResult.IsValid)
             {
-                result.Success = false;
-                result.Errors = validationResult.Errors;
-                result.Message = "Invalid Data";
-                return result;
+                return CreateFailureMessage<Task>("Invalid Data", validationResult.Errors);            
             }
-            task.ModifiedOn = DateTime.Now;
             try
             {
                 this.TaskRepository.Update(task);
-                result.Message = "Updated Successfully";
-                result.Data = task;
-                result.Success = true;
-                return result;
-
+                return CreateSuccessMessage<Task>("Task updated successfully", task);
             }
             catch (Exception exception)
             {
-                throw exception;
+                return CreateFailureMessage<Task>(exception.Message, null);
             }
         }
     }

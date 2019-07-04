@@ -10,10 +10,8 @@ namespace Shared.Interfaces.BusinessLogicInterfaces
 {
     public interface ITaskCategoryBusinessLogic
     {
-        MessageFormat<TaskCategory> Add(TaskCategory taskCategory);
-        MessageFormat<List<TaskCategory>> GetAll();
-        MessageFormat<TaskCategory> GetById(int id);
-        MessageFormat<TaskCategory> Delete(int id);
-        MessageFormat<TaskCategory> Update(TaskCategory taskCategory);
+        OperationResult<TaskCategory> AddTaskCategory(TaskCategory taskCategory);
+        OperationResult<List<TaskCategory>> GetAllTaskCategories();
+        OperationResult<TaskCategory> GetTaskCategoryById(int id);
     }
 }

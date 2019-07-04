@@ -1,55 +1,36 @@
-﻿
-using System;
-using System.Collections.Generic;
-using ServiceStack;
-using ServiceStack.ServiceInterface;
-using Shared.DomainModels;
-using Shared.Interfaces.BusinessLogicInterfaces;
-using Shared.Utils;
-using UserTaskManger.ServiceModel.Task.RequestDTOs;
-using UserTaskManger.ServiceModel.Task.ResponseDTOs;
-
-namespace UserTaskManger.ServiceInterface.Services
+﻿namespace UserTaskManger.ServiceInterface.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using ServiceStack.ServiceInterface;
+    using Shared.DomainModels;
+    using Shared.Interfaces.BusinessLogicInterfaces;
+    using Shared.Utils;
+    using UserTaskManger.ServiceModel.Task.RequestDTOs;
+
     public class TaskService : Service
     {
-        readonly ITaskBusinessLogic TaskBusinessLogic;
+        private readonly ITaskBusinessLogic TaskBusinessLogic;
         public TaskService(ITaskBusinessLogic taskBusinessLogic)
         {
             TaskBusinessLogic = taskBusinessLogic;
         }
 
-        public object Post(CreateTaskRequestDTO createTaskRequestDTO)
+        public OperationResult<Task> Post(CreateTaskRequestDTO request)
         {
-            try
-            {
-                MessageFormat<Task> result = this.TaskBusinessLogic.Add(createTaskRequestDTO.Task);
-                return new CreateTaskResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return this.TaskBusinessLogic.AddTask(request.Task);
         }
 
-        public object Delete(DeleteTaskRequestDTO deleteTaskRequestDTO)
+        public OperationResult<Task> Delete(DeleteTaskRequestDTO request)
         {
-            try
-            {
-                MessageFormat<Task> result = this.TaskBusinessLogic.Delete(deleteTaskRequestDTO.Id);
-                return new CreateTaskResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return this.TaskBusinessLogic.DeleteTask(request.Id);
         }
 
         public object Get(GetAllTasksRequestDTO getAllTasksRequestDTO)
         {
             try
             {
-                MessageFormat<List<Task>> result = this.TaskBusinessLogic.GetAll();
+                OperationResult<List<Task>> result = this.TaskBusinessLogic.GetAll();
                 return new GetAllTasksResponseDTO { Result = result };
             }
             catch (Exception exception)
@@ -58,11 +39,11 @@ namespace UserTaskManger.ServiceInterface.Services
             }
         }
 
-        public object Put(UpdateTaskRequestDTO updateTaskRequestDTO)
+        public OperationResult<Task> Put(UpdateTaskRequestDTO updateTaskRequestDTO)
         {
             try
             {
-                MessageFormat<Task> result = this.TaskBusinessLogic.Update(updateTaskRequestDTO.Task);
+                OperationResult<Task> result = this.TaskBusinessLogic.Update(updateTaskRequestDTO.Task);
                 return new UpdateTaskResponseDTO { Result = result };
             }
             catch (Exception exception)
@@ -75,7 +56,7 @@ namespace UserTaskManger.ServiceInterface.Services
         {
             try
             {
-                MessageFormat<Task> result = this.TaskBusinessLogic.GetById(getTaskByIdRequestDTO.Id);
+                OperationResult<Task> result = this.TaskBusinessLogic.GetById(getTaskByIdRequestDTO.Id);
                 return new GetTaskByIdResponseDTO { Result = result };
             }
             catch (Exception exception)

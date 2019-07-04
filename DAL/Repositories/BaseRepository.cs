@@ -54,9 +54,9 @@
             UnitOfWork.Commit();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        public List<T> Find(Expression<Func<T, bool>> predicate)
         {
-            return DbSet.Where(predicate);
+            return DbSet.Where(predicate).ToList();
         }
 
         public T FindById(int Id)

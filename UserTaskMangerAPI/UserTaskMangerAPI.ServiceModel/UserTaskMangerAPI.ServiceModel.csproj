@@ -82,35 +82,15 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskCategory\RequestDTOs\CreateTaskCategoryRequestDTO.cs" />
-    <Compile Include="TaskCategory\RequestDTOs\DeleteTaskCategoryRequestDTO.cs" />
     <Compile Include="TaskCategory\RequestDTOs\GetAllTaskCategoriesRequestDTO.cs" />
     <Compile Include="TaskCategory\RequestDTOs\GetTaskCategoryByIdRequestDTO.cs" />
-    <Compile Include="TaskCategory\RequestDTOs\UpdateTaskCategoryRequestDTO.cs" />
-    <Compile Include="TaskCategory\ResponseDTOs\CreateTaskCategoryResponseDTO.cs" />
-    <Compile Include="TaskCategory\ResponseDTOs\DeleteTaskCategoryResponseDTO.cs" />
-    <Compile Include="TaskCategory\ResponseDTOs\GetAllTaskCategoriesResponseDTO.cs" />
-    <Compile Include="TaskCategory\ResponseDTOs\GetTaskCategoryByIdResponseDTO.cs" />
-    <Compile Include="TaskCategory\ResponseDTOs\UpdateTaskCategoryResponseDTO.cs" />
     <Compile Include="Task\RequestDTOs\CreateTaskRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\DeleteTaskRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\GetAllTasksRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\GetTaskByIdRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\UpdateTaskRequestDTO.cs" />
-    <Compile Include="Task\ResponseDTOs\CreateTaskResponseDTO.cs" />
-    <Compile Include="Task\ResponseDTOs\DeleteTaskResponseDTO.cs" />
-    <Compile Include="Task\ResponseDTOs\GetAllTasksResponseDTO.cs" />
-    <Compile Include="Task\ResponseDTOs\GetTaskByIdResponseDTO.cs" />
-    <Compile Include="Task\ResponseDTOs\UpdateTaskResponseDTO.cs" />
     <Compile Include="User\RequestDTOs\CreateUserRequestDTO.cs" />
-    <Compile Include="User\RequestDTOs\DeleteUserRequestDTO.cs" />
-    <Compile Include="User\RequestDTOs\GetAllUsersRequestDTO.cs" />
-    <Compile Include="User\RequestDTOs\GetUserByIdRequestDTO.cs" />
-    <Compile Include="User\RequestDTOs\UpdateUserRequestDTO.cs" />
-    <Compile Include="User\ResponseDTOs\CreateUserResponseDTO.cs" />
-    <Compile Include="User\ResponseDTOs\DeleteUserResponseDTO.cs" />
-    <Compile Include="User\ResponseDTOs\GetAllUsersResponseDTO.cs" />
-    <Compile Include="User\ResponseDTOs\GetUserByIdResponseDTO.cs" />
-    <Compile Include="User\ResponseDTOs\UpdateUserResponseDTO.cs" />
+    <Compile Include="User\RequestDTOs\LoginUserRequestDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Shared.csproj">

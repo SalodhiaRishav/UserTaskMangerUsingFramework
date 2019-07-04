@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ServiceStack;
-using UserTaskManger.ServiceModel.Task.ResponseDTOs;
-using ServiceStack.ServiceHost;
-
-
-namespace UserTaskManger.ServiceModel.TaskCategory.RequestDTOs
+﻿namespace UserTaskMangerAPI.ServiceModel.TaskCategory.RequestDTOs
 {
+    using System.Collections.Generic;
+    using ServiceStack.ServiceHost;
+    using Shared.Utils;
+
     [Route("/taskcategory", "GET")]
-    public class GetAllTaskCategoriesRequestDTO 
-    {
-      
+    public class GetAllTaskCategoriesRequestDTO : IReturn<OperationResult<List<Shared.DomainModels.TaskCategory>>>
+    {     
     }
 }

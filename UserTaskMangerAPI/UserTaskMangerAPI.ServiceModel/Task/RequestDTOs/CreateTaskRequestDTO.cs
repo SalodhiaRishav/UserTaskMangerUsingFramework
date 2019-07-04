@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ServiceStack;
-
-using UserTaskManger.ServiceModel.Task.ResponseDTOs;
-using ServiceStack.ServiceHost;
-
-
-
-namespace UserTaskManger.ServiceModel.Task.RequestDTOs
+﻿namespace UserTaskManger.ServiceModel.Task.RequestDTOs
 {
+    using ServiceStack.ServiceHost;
+    using Shared.Utils;
+
     [Route("/task", "POST")]
-    public class CreateTaskRequestDTO 
+    public class CreateTaskRequestDTO : IReturn<OperationResult<Shared.DomainModels.Task>> 
     {
        public Shared.DomainModels.Task Task { get; set; }
     }

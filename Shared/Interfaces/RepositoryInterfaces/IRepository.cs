@@ -17,6 +17,6 @@ namespace Shared.Interfaces.RepositoryInterfaces
         T FindById(int Id);
         void AddRange(IEnumerable<T> entityList);
         void DeleteRange(IEnumerable<T> entityList);
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
+        List<T> Find(Expression<Func<T, bool>> predicate);
     }
 }

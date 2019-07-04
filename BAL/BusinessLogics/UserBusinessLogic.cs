@@ -1,170 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation.Results;
-using Shared.DomainModels;
-using Shared.Interfaces.BusinessLogicInterfaces;
-using Shared.Interfaces.RepositoryInterfaces;
-using Shared.Utils;
-using Shared.Validators;
-
-namespace BAL.BusinessLogics
+﻿namespace BAL.BusinessLogics
 {
-    public class UserBusinessLogic : IUserBusinessLogic
+    using System;
+    using System.Collections.Generic;
+    using FluentValidation.Results;
+    using Shared.DomainModels;
+    using Shared.Interfaces.BusinessLogicInterfaces;
+    using Shared.Interfaces.RepositoryInterfaces;
+    using Shared.Utils;
+    using Shared.Validators;
+
+    public class UserBusinessLogic : BaseBusinessLogic, IUserBusinessLogic
     {
-        IUserRepository UserRepository;
+        private readonly IUserRepository UserRepository;
+
         public UserBusinessLogic(IUserRepository userRepository)
         {
             UserRepository = userRepository;
         }
-        public MessageFormat<User> Add(User user)
+
+        public OperationResult<User> AddUser(User newuser)
         {
-            user.CreatedOn = DateTime.Now;
-            user.ModifiedOn = DateTime.Now;
-            MessageFormat<User> result = new MessageFormat<User>();
             UserValidator userValidator = new UserValidator();
-            ValidationResult validationResult = userValidator.Validate(user);
+            ValidationResult validationResult = userValidator.Validate(newuser);
+
             if (!validationResult.IsValid)
             {
-                result.Success = false;
-                result.Errors = validationResult.Errors;
-                result.Message = "Invalid Data";
-                return result;
+                return CreateFailureMessage<User>("Invalid Data", validationResult.Errors);
             }
-           
+
             try
             {
-                var userList = UserRepository.List;
-                if (userList.Count != 0)
+                List<User> userList = UserRepository.List;
+                User user = userList.Find(fuser => fuser.Email == newuser.Email);
+                if (user != null)
                 {
-                    var tempuser = userList.Find(fuser => fuser.Email == user.Email);
-                    if (tempuser != null)
-                    {
-                        result.Message = "Email already exists";
-                        result.Success = false;
-                        return result;
-                    }
-                    else
-                    {
-                        UserRepository.Add(user);                                           
-                        result.Data = user;
-                        result.Message = "Added successfully";
-                        result.Success = true;
-                        return result;
-                    }
+                    return CreateFailureMessage<User>("Email already exists", null);
                 }
                 else
                 {
-                    UserRepository.Add(user);
-                    result.Data = user;
-                    result.Message = "Added successfully";
-                    result.Success = true;
-                    return result;                    
+                    UserRepository.Add(newuser);
+                    return CreateSuccessMessage<User>("Added successfully", newuser);
                 }
             }
             catch (Exception exception)
             {
-                throw exception;
+                return CreateFailureMessage<User>(exception.Message, null);
             }
         }
 
-        public MessageFormat<User> Delete(int id)
+        public OperationResult<User> LoginUser(string email, string password)
         {
-            MessageFormat<User> result = new MessageFormat<User>();
             try
             {
-                User user = this.UserRepository.FindById(id);
-                if (user == null)
+                List<User> userList = UserRepository.Find(fuser => fuser.Email == email && fuser.Password == password);
+                if (userList.Count != 0)
                 {
-                    result.Message = "No task found with this id";
-                    result.Success = false;
-                    return result;
+                    return CreateSuccessMessage<User>("User Found", userList[0]);
                 }
-                this.UserRepository.Delete(user);           
-                result.Message = "Deleted successfully";
-                result.Success = true;
-                return result;
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public MessageFormat<List<User>> GetAll()
-        {
-            MessageFormat<List<User>> result = new MessageFormat<List<User>>();
-            try
-            {
-                List<User> userList = this.UserRepository.List;
-                if (userList.Count == 0)
+                else
                 {
-                    result.Message = "Empty List";
-                    result.Success = false;
-                    return result;
+                    return CreateFailureMessage<User>("User Not Found", null);
                 }
-                result.Message = "Retrieved Successfully";
-                result.Success = true;
-                result.Data = userList;
-                return result;
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
-                throw exception;
-            }
-        }
-
-        public MessageFormat<User> GetById(int id)
-        {
-            MessageFormat<User> result = new MessageFormat<User>();
-            try
-            {
-                User user = this.UserRepository.GetUserWithTasks(id);
-                if (user == null)
-                {
-                    result.Message = "No task found with this id";
-                    result.Success = false;
-                    return result;
-                }
-              
-                result.Message = "Retrieved successfully";
-                result.Success = true;
-                result.Data = user;
-                return result;
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public MessageFormat<User> Update(User user)
-        {
-            MessageFormat<User> result = new MessageFormat<User>();
-            UserValidator userValidator = new UserValidator();
-            ValidationResult validationResult = userValidator.Validate(user);
-            if (!validationResult.IsValid)
-            {
-                result.Success = false;
-                result.Errors = validationResult.Errors;
-                result.Message = "Invalid Data";
-                return result;
-            }
-            user.ModifiedOn = DateTime.Now;
-            try
-            {
-               this.UserRepository.Update(user);                
-                result.Message = "Updated Successfully";
-                result.Data = user;
-                result.Success = true;
-                return result;
-
-            }
-            catch (Exception exception)
-            {
-                throw exception;
+                return CreateFailureMessage<User>(exception.Message, null);
             }
         }
     }

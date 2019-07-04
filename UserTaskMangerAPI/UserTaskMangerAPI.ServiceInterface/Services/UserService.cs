@@ -1,86 +1,27 @@
-﻿using System.Collections.Generic;
-using ServiceStack;
-using UserTaskManger.ServiceModel.User.RequestDTOs;
-using UserTaskManger.ServiceModel.User.ResponseDTOs;
-using System;
-using Shared.Interfaces.BusinessLogicInterfaces;
-using Shared.Utils;
-using Shared.DomainModels;
-using ServiceStack.ServiceInterface;
-
-namespace UserTaskManger.ServiceInterface.Services
+﻿namespace UserTaskMangerAPI.ServiceInterface.Services
 {
+    using ServiceStack.ServiceInterface;
+    using Shared.DomainModels;
+    using Shared.Interfaces.BusinessLogicInterfaces;
+    using Shared.Utils;
+    using UserTaskMangerAPI.ServiceModel.User.RequestDTOs;
+
     public class UserService : Service
     {
-        readonly IUserBusinessLogic UserBusinessLogic;
+        private readonly IUserBusinessLogic UserBusinessLogic;
         public UserService(IUserBusinessLogic userBusinessLogic)
         {
             UserBusinessLogic = userBusinessLogic;
         }
 
-        public object Get(GetUserByIdRequestDTO getUserByIdRequestDTO)
+        public OperationResult<User> Post(CreateUserRequestDTO request)
         {
-            try
-            {
-                MessageFormat<User> result = this.UserBusinessLogic.GetById(getUserByIdRequestDTO.Id);
-                return new GetUserByIdResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return this.UserBusinessLogic.AddUser(request.User);
         }
 
-        public object Get(GetAllUsersRequestDTO request)
+        public OperationResult<User> Post(LoginUserRequestDTO request)
         {
-            try
-            {
-                MessageFormat<List<User>> result = this.UserBusinessLogic.GetAll();
-                return new GetAllUsersResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public object Delete(DeleteUserRequestDTO deleteUserRequestDTO)
-        {
-            try
-            {
-                MessageFormat<User> result = this.UserBusinessLogic.Delete(deleteUserRequestDTO.Id);
-                return new DeleteUserResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public object Post(CreateUserRequestDTO createUserRequestDTO)
-        {
-            try
-            {
-                MessageFormat<User> result = this.UserBusinessLogic.Add(createUserRequestDTO.User);
-                return new CreateUserResponseDTO { Result = result };
-            }
-            catch(Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public object Put(UpdateUserRequestDTO updateUserRequestDTO)
-        {
-            try
-            {
-                MessageFormat<User> result = this.UserBusinessLogic.Update(updateUserRequestDTO.User);
-                return new UpdateUserResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return this.UserBusinessLogic.LoginUser(request.email, request.password);
         }
     }
 }

@@ -10,10 +10,7 @@ namespace Shared.Interfaces.BusinessLogicInterfaces
 {
     public interface IUserBusinessLogic
     {
-        MessageFormat<User> Add(User user);
-        MessageFormat<List<User>> GetAll();
-        MessageFormat<User> GetById(int id);
-        MessageFormat<User> Delete(int id);
-        MessageFormat<User> Update(User userDTO);
+        OperationResult<User> AddUser(User user);
+        OperationResult<User> LoginUser(string email, string password);
     }
 }
