@@ -22,10 +22,10 @@
         {
             UserValidator userValidator = new UserValidator();
             ValidationResult validationResult = userValidator.Validate(newuser);
-
+            OperationResult<User> result = null;
             if (!validationResult.IsValid)
             {
-                return CreateFailureMessage<User>("Invalid Data", validationResult.Errors);
+                result = CreateFailureMessage<User>("Invalid Data", validationResult.Errors,"400");
             }
 
             try
@@ -34,38 +34,41 @@
                 User user = userList.Find(fuser => fuser.Email == newuser.Email);
                 if (user != null)
                 {
-                    return CreateFailureMessage<User>("Email already exists", null);
+                    result = CreateFailureMessage<User>("Email already exists", null,"400");
                 }
                 else
                 {
                     UserRepository.Add(newuser);
-                    return CreateSuccessMessage<User>("Added successfully", newuser);
+                    result = CreateSuccessMessage<User>("Added successfully", newuser);
                 }
             }
             catch (Exception exception)
             {
-                return CreateFailureMessage<User>(exception.Message, null);
+                result = CreateFailureMessage<User>(exception.Message, null,"500");
             }
+            return result;
         }
 
         public OperationResult<User> LoginUser(string email, string password)
         {
+            OperationResult<User> result = null;
             try
             {
                 List<User> userList = UserRepository.Find(fuser => fuser.Email == email && fuser.Password == password);
                 if (userList.Count != 0)
                 {
-                    return CreateSuccessMessage<User>("User Found", userList[0]);
+                   result = CreateSuccessMessage<User>("User Found", userList[0]);
                 }
                 else
                 {
-                    return CreateFailureMessage<User>("User Not Found", null);
+                    result = CreateFailureMessage<User>("User Not Found", null,"404");
                 }
             }
             catch(Exception exception)
             {
-                return CreateFailureMessage<User>(exception.Message, null);
+                result = CreateFailureMessage<User>(exception.Message, null,"500");
             }
+            return result;
         }
     }
 }

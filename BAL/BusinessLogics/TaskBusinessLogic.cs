@@ -18,92 +18,111 @@
         }
         public OperationResult<Task> AddTask(Task task)
         {
+            OperationResult<Task> result = null;
             TaskValidator taskValidator = new TaskValidator();
             ValidationResult validationResult = taskValidator.Validate(task);
             if (!validationResult.IsValid)
             {
-                return CreateFailureMessage<Task>("Invalid Data", validationResult.Errors);
+                result = CreateFailureMessage<Task>("Invalid Data", validationResult.Errors, "400");
             }
             try
             {
                 this.TaskRepository.Add(task);
-                return CreateSuccessMessage<Task>("Task Added Successully", task);
+                result = CreateSuccessMessage<Task>("Task Added Successully", task);
             }
             catch (Exception exception)
             {
-                return CreateFailureMessage<Task>(exception.Message, null);
+                result = CreateFailureMessage<Task>(exception.Message, null, "500");
             }
+            return result;
         }
 
         public OperationResult<Task> DeleteTask(int taskId)
         {
+            OperationResult<Task> result = null;
             try
             {
                 Task task = this.TaskRepository.FindById(taskId);
                 if (task == null)
                 {
-                    return CreateFailureMessage<Task>("No task found with this id", null);
+                    result = CreateFailureMessage<Task>("No task found with this id", null, "404");
                 }
-                this.TaskRepository.Delete(task);
-                return CreateSuccessMessage<Task>("Task Deleted Successfully", null);
+                else
+                {
+                    this.TaskRepository.Delete(task);
+                    result = CreateSuccessMessage<Task>("Task Deleted Successfully", null);
+                }
             }
             catch (Exception exception)
             {
-                return CreateFailureMessage<Task>(exception.Message, null);
+                result = CreateFailureMessage<Task>(exception.Message, null, "500");
             }
+            return result;
         }
 
         public OperationResult<List<Shared.DomainModels.Task>> GetAllTasks()
         {
+            OperationResult<List<Task>> result = null;
             try
             {
                 List<Task> taskList = this.TaskRepository.List;
                 if (taskList.Count == 0)
                 {
-                    return CreateFailureMessage<List<Task>>("Empty tasks", null);
+                    result = CreateFailureMessage<List<Task>>("Empty tasks", null, "404");
                 }
-                return CreateSuccessMessage<List<Task>>("Tasks retrieved successfully", taskList);
+                else
+                {
+                    result = CreateSuccessMessage<List<Task>>("Tasks retrieved successfully", taskList);
+                }
             }
             catch (Exception exception)
             {
-                return CreateFailureMessage<List<Task>>(exception.Message, null);
+                result = CreateFailureMessage<List<Task>>(exception.Message, null, "500");
             }
+            return result;
         }
 
         public OperationResult<List<Task>> GetTasksForUserId(int userId)
         {
+            OperationResult<List<Task>> result = null;
             try
             {
                 List<Task> tasks = this.TaskRepository.Find(task => task.UserID == userId);
-                if (tasks.Count==0)
+                if (tasks.Count == 0)
                 {
-                    return CreateFailureMessage<List<Task>>("Not any task found for this user", null);
+                    result = CreateFailureMessage<List<Task>>("Not any task found for this user", null, "404");
                 }
-                return CreateSuccessMessage<List<Task>>("Tasks retrieved successfully", tasks);            
+                else
+                {
+                    result = CreateSuccessMessage<List<Task>>("Tasks retrieved successfully", tasks);
+                }
             }
             catch (Exception exception)
             {
-                return CreateFailureMessage<List<Task>>(exception.Message, null);
+                result = CreateFailureMessage<List<Task>>(exception.Message, null, "500");
             }
+            return result;
         }
 
         public OperationResult<Task> UpdateTask(Task task)
         {
+            OperationResult<Task> result = null;
             TaskValidator taskValidator = new TaskValidator();
             ValidationResult validationResult = taskValidator.Validate(task);
             if (!validationResult.IsValid)
             {
-                return CreateFailureMessage<Task>("Invalid Data", validationResult.Errors);            
+                result = CreateFailureMessage<Task>("Invalid Data", validationResult.Errors, "400");
             }
             try
             {
                 this.TaskRepository.Update(task);
-                return CreateSuccessMessage<Task>("Task updated successfully", task);
+                result = CreateSuccessMessage<Task>("Task updated successfully", task);
             }
             catch (Exception exception)
             {
-                return CreateFailureMessage<Task>(exception.Message, null);
+                result = CreateFailureMessage<Task>(exception.Message, null, "500");
             }
+            return result;
         }
     }
 }

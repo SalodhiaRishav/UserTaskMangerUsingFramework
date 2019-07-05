@@ -18,6 +18,5 @@ namespace Shared.DomainModels
         public int TaskCategoryID { get; set; }
 
         public TaskCategory TaskCategory { get; set; }
-
     }
 }
