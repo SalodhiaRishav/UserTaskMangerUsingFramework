@@ -21,7 +21,7 @@
 
         public OperationResult<User> Post(LoginUserRequestDTO request)
         {
-            return this.UserBusinessLogic.LoginUser(request.email, request.password);
+            return this.UserBusinessLogic.LoginUser(request.Email, request.Password);
         }
     }
 }

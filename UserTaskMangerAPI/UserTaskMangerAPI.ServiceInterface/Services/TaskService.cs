@@ -6,7 +6,7 @@
     using Shared.DomainModels;
     using Shared.Interfaces.BusinessLogicInterfaces;
     using Shared.Utils;
-    using UserTaskManger.ServiceModel.Task.RequestDTOs;
+    using UserTaskMangerAPI.ServiceModel.Task.RequestDTOs;
 
     public class TaskService : Service
     {
@@ -26,48 +26,20 @@
             return this.TaskBusinessLogic.DeleteTask(request.Id);
         }
 
-        public object Get(GetAllTasksRequestDTO getAllTasksRequestDTO)
+        public object Get(GetTasksForUserRequestDTO request)
+
         {
-            try
-            {
-                OperationResult<List<Task>> result = this.TaskBusinessLogic.GetAll();
-                return new GetAllTasksResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return this.TaskBusinessLogic.GetTasksForUser(request.UserId);
         }
 
-        public OperationResult<Task> Put(UpdateTaskRequestDTO updateTaskRequestDTO)
+        public object Get(GetAllTasksRequestDTO request)
         {
-            try
-            {
-                OperationResult<Task> result = this.TaskBusinessLogic.Update(updateTaskRequestDTO.Task);
-                return new UpdateTaskResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+            return this.TaskBusinessLogic.GetAllTasks();
         }
 
-        public object Get(GetTaskByIdRequestDTO getTaskByIdRequestDTO)
+        public OperationResult<Task> Put(UpdateTaskRequestDTO request)
         {
-            try
-            {
-                OperationResult<Task> result = this.TaskBusinessLogic.GetById(getTaskByIdRequestDTO.Id);
-                return new GetTaskByIdResponseDTO { Result = result };
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
-
-        public object Execute(Task request)
-        {
-            throw new NotImplementedException();
+            return this.TaskBusinessLogic.UpdateTask(request.Task);
         }
     }
 }

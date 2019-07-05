@@ -1,4 +1,4 @@
-﻿namespace UserTaskManger.ServiceModel.Task.RequestDTOs
+﻿namespace UserTaskMangerAPI.ServiceModel.Task.RequestDTOs
 {
     using ServiceStack.ServiceHost;
     using Shared.Utils;

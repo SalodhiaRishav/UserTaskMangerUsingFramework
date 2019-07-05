@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ServiceStack;
-
-using UserTaskManger.ServiceModel.Task.ResponseDTOs;
-using ServiceStack.ServiceHost;
-
-
-namespace UserTaskManger.ServiceModel.Task.RequestDTOs
+﻿namespace UserTaskMangerAPI.ServiceModel.Task.RequestDTOs
 {
+    using System.Collections.Generic;
+    using ServiceStack.ServiceHost;
+    using Shared.Utils;
+
     [Route("/task", "GET")]
-    public class GetAllTasksRequestDTO 
+    public class GetAllTasksRequestDTO : IReturn<OperationResult<List<Shared.DomainModels.Task>>>
     {
       
     }

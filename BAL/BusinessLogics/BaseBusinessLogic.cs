@@ -19,11 +19,18 @@
         public static OperationResult<TypeOfEntity> CreateFailureMessage<TypeOfEntity>(string message,IList<ValidationFailure> validationeErrors,string responseCode)
         {
             OperationResult<TypeOfEntity> result = new OperationResult<TypeOfEntity>();
-            List<string> errors = new List<string>();           
-            foreach(var error in validationeErrors)
+            List<string> errors = new List<string>();
+            if(validationeErrors==null)
             {
-                errors.Add(error.ErrorMessage);
+                errors = null;
             }
+            else
+            {
+                foreach (var error in validationeErrors)
+                {
+                    errors.Add(error.ErrorMessage);
+                }
+            }          
             result.Errors = errors;
             result.Message = message;
             result.Success = false;

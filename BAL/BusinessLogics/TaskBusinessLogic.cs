@@ -82,7 +82,7 @@
             return result;
         }
 
-        public OperationResult<List<Task>> GetTasksForUserId(int userId)
+        public OperationResult<List<Task>> GetTasksForUser(int userId)
         {
             OperationResult<List<Task>> result = null;
             try

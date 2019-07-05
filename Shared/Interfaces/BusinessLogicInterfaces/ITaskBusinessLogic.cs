@@ -11,7 +11,7 @@ namespace Shared.Interfaces.BusinessLogicInterfaces
     {
         OperationResult<Task> AddTask(Task task);
         OperationResult<List<Task>> GetAllTasks();
-        OperationResult<List<Task>> GetTasksForUserId(int userId);
+        OperationResult<List<Task>> GetTasksForUser(int userId);
         OperationResult<Task> DeleteTask(int taskId);
         OperationResult<Task> UpdateTask(Task task);
     }

@@ -8,7 +8,7 @@ using ServiceStack.WebHost.Endpoints;
 using Shared.Interfaces.BusinessLogicInterfaces;
 using Shared.Interfaces.RepositoryInterfaces;
 using Shared.Interfaces.UnitOfWorkInterfaces;
-using UserTaskManger.ServiceInterface.Services;
+using UserTaskMangerAPI.ServiceInterface.Services;
 
 namespace UserTaskMangerAPI
 {

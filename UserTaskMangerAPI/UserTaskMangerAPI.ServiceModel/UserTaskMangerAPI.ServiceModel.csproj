@@ -87,7 +87,7 @@
     <Compile Include="Task\RequestDTOs\CreateTaskRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\DeleteTaskRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\GetAllTasksRequestDTO.cs" />
-    <Compile Include="Task\RequestDTOs\GetTaskByIdRequestDTO.cs" />
+    <Compile Include="Task\RequestDTOs\GetTasksForUserRequestDTO.cs" />
     <Compile Include="Task\RequestDTOs\UpdateTaskRequestDTO.cs" />
     <Compile Include="User\RequestDTOs\CreateUserRequestDTO.cs" />
     <Compile Include="User\RequestDTOs\LoginUserRequestDTO.cs" />
