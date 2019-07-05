@@ -1,7 +1,6 @@
 ﻿namespace Shared.Utils
 {
     using System.Collections.Generic;
-    using FluentValidation.Results;
 
     public class OperationResult<T>
     {

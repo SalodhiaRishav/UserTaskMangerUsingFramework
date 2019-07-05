@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.DomainModels;
-
-namespace Shared.Interfaces.RepositoryInterfaces
+﻿namespace Shared.Interfaces.RepositoryInterfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using Shared.DomainModels;
+
     public interface IRepository<T> where T : BaseDomain
     {
         List<T> List { get; }

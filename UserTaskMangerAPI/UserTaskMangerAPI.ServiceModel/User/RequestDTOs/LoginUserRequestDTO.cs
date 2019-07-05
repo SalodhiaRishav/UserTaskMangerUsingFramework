@@ -3,7 +3,7 @@
     using ServiceStack.ServiceHost;
     using Shared.Utils;
 
-    [Route("/user", "POST")]
+    [Route("/login", "POST")]
     public class LoginUserRequestDTO : IReturn<OperationResult<Shared.DomainModels.User>>
     {
         public string Email { get; set; }

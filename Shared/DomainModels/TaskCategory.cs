@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace Shared.DomainModels
+﻿namespace Shared.DomainModels
 {
     public class TaskCategory : BaseDomain
     {

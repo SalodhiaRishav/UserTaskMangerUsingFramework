@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace Shared.DomainModels
+﻿namespace Shared.DomainModels
 {
+    using System;
+
     public class Task:BaseDomain
     {
         public int TimeSpent { get; set; }

@@ -27,7 +27,6 @@
             entity.ModifiedOn = DateTime.Now;
             entity.CreatedOn = DateTime.Now;
             DbSet.Add(entity);
-            UnitOfWork.TaskManagerDBContext.SaveChanges();
             UnitOfWork.Commit();           
         }
 

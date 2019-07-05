@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FluentValidation;
-using Shared.DomainModels;
-
-namespace Shared.Validators
+﻿namespace Shared.Validators
 {
+    using System;
+    using FluentValidation;
+    using Shared.DomainModels;
+
     public class TaskValidator : AbstractValidator<Task>
     {
         public TaskValidator()
         {
-            RuleFor(task => task.ExpectedTime).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(task => task.TimeSpent).NotNull().NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(task => task.UserStory).NotNull().NotEmpty().Length(1, 200);
-            RuleFor(task => task.TaskDate).NotNull().NotEmpty();
-
-
+            RuleFor(task => task.ExpectedTime).GreaterThan(0);
+            RuleFor(task => task.TimeSpent).GreaterThan(0);
+            RuleFor(task => task.UserStory).Cascade(CascadeMode.StopOnFirstFailure).CheckNull().NotEmpty().Length(1, 200);
+            RuleFor(task => task.TaskDate).Must(taskDate => taskDate > DateTime.MinValue)
+                .WithMessage($"Please enter date greater than {DateTime.MinValue}");
         }
     }
 }

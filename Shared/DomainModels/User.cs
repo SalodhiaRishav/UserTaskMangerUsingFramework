@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace Shared.DomainModels
 {
     public class User : BaseDomain
     {
-
         public string FirstName { get; set; }
         
         public string LastName { get; set; }

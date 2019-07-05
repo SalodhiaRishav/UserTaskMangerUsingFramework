@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.Interfaces.UnitOfWorkInterfaces
+﻿namespace Shared.Interfaces.UnitOfWorkInterfaces
 {
-   public interface ITaskUnitOfWork : IUnitOfWork
+    public interface ITaskUnitOfWork : IUnitOfWork
     {
     }
 }

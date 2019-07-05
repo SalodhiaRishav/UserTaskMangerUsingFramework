@@ -6,7 +6,7 @@
 
     public class BaseBusinessLogic
     {
-        public static OperationResult<TypeOfEntity> CreateSuccessMessage<TypeOfEntity>(string message, TypeOfEntity data)
+        public static OperationResult<TypeOfEntity> CreateSuccessResult<TypeOfEntity>(string message, TypeOfEntity data)
         {
             OperationResult<TypeOfEntity> result = new OperationResult<TypeOfEntity>();
             result.Success = true;
@@ -16,7 +16,7 @@
             return result;
         }
 
-        public static OperationResult<TypeOfEntity> CreateFailureMessage<TypeOfEntity>(string message,IList<ValidationFailure> validationeErrors,string responseCode)
+        public static OperationResult<TypeOfEntity> CreateFailureResult<TypeOfEntity>(string message,IList<ValidationFailure> validationeErrors,string responseCode)
         {
             OperationResult<TypeOfEntity> result = new OperationResult<TypeOfEntity>();
             List<string> errors = new List<string>();

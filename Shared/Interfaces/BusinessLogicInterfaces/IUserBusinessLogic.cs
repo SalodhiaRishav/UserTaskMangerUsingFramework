@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shared.DomainModels;
-using Shared.Utils;
-
-namespace Shared.Interfaces.BusinessLogicInterfaces
+﻿namespace Shared.Interfaces.BusinessLogicInterfaces
 {
+    using Shared.DomainModels;
+    using Shared.Utils;
+
     public interface IUserBusinessLogic
     {
         OperationResult<User> AddUser(User user);

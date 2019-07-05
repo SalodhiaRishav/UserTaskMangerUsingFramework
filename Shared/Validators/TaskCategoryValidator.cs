@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using Shared.DomainModels;
-
-namespace Shared.Validators
+﻿namespace Shared.Validators
 {
+    using FluentValidation;
+    using Shared.DomainModels;
+
     public class TaskCategoryValidator : AbstractValidator<TaskCategory>
     {
         public TaskCategoryValidator()
         {
-            RuleFor(taskCategory => taskCategory.CategoryName).NotNull().NotEmpty().Length(1, 50);
+            RuleFor(taskCategory => taskCategory.CategoryName).Cascade(CascadeMode.StopOnFirstFailure).CheckNull().NotEmpty().Length(1, 50);
         }
 
     }
