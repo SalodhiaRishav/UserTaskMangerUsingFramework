@@ -11,7 +11,7 @@
 
     public class TaskBusinessLogic : BaseBusinessLogic, ITaskBusinessLogic
     {
-        public TaskRepository TaskRepository;
+        private readonly TaskRepository TaskRepository;
         public TaskBusinessLogic(TaskRepository taskRepository)
         {
             TaskRepository = taskRepository;
@@ -60,6 +60,7 @@
 
         public OperationResult<List<Shared.DomainModels.Task>> GetAllTasks()
         {
+            Logger.Instance.Info("some message");
             try
             {
                 List<Task> taskList = this.TaskRepository.List;

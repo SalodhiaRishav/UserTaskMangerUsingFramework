@@ -15,7 +15,7 @@
         }
 
         public OperationResult<User> Post(CreateUserRequestDTO request)
-        {
+        {           
             return this.UserBusinessLogic.AddUser(request.User);
         }
 

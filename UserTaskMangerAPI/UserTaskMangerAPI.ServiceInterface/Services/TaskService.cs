@@ -1,7 +1,5 @@
 ﻿namespace UserTaskManger.ServiceInterface.Services
 {
-    using System;
-    using System.Collections.Generic;
     using ServiceStack.ServiceInterface;
     using Shared.DomainModels;
     using Shared.Interfaces.BusinessLogicInterfaces;

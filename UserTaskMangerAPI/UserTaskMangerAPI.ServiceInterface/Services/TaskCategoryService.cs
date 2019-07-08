@@ -26,6 +26,7 @@
         }
 
         public OperationResult<TaskCategory> Get(GetTaskCategoryByIdRequestDTO request)
+
         {
             return this.TaskCategoryBusinessLogic.GetTaskCategoryById(request.Id);
         }

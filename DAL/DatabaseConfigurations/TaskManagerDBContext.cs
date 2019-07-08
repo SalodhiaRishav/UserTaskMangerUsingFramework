@@ -9,7 +9,6 @@
     {
         public TaskManagerDBContext() : base("TaskManagerDBConnectionString")
         {
-
         }
         public DbSet<User> Users { get; set; }
         public DbSet<TaskCategory> TaskCategories { get; set; }
