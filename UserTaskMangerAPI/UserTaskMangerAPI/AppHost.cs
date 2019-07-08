@@ -11,7 +11,8 @@
     using Shared.Interfaces.BusinessLogicInterfaces;
     using Shared.Interfaces.RepositoryInterfaces;
     using Shared.Interfaces.UnitOfWorkInterfaces;
-    using UserTaskMangerAPI.ServiceInterface.Services; //VS.NET Template Info: https://servicestack.net/vs-templates/EmptyAspNet
+    using UserTaskMangerAPI.ServiceInterface.Services;
+
     public class AppHost : AppHostBase
     {
 

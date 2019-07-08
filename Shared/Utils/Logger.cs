@@ -13,7 +13,7 @@
         private const string InnerExceptionName = "Inner Exception";
         private const string ExceptionMessageWithoutInnerException = "{0}{1}: {2}Message: {3}{4}StackTrace: {5}.";
         private const string ExceptionMessageWithInnerException = "{0}{1}{2}";
-     
+
         #region Properties
 
 

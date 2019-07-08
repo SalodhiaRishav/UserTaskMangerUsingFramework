@@ -43,6 +43,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<User>(exception.Message, null, "500");
             }
         }
@@ -63,6 +64,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<User>(exception.Message, null, "500");
             }
         }

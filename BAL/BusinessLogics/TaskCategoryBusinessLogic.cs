@@ -33,6 +33,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<TaskCategory>(exception.Message, null, "500");
             }
         }
@@ -53,6 +54,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<List<TaskCategory>>(exception.Message, null, "500");
             }
         }
@@ -70,6 +72,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<TaskCategory>(exception.Message, null,"500");
             }
         }

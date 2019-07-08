@@ -32,7 +32,7 @@
             }
             catch (Exception exception)
             {
-
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<Task>(exception.Message, null, "500");
             }
         }
@@ -54,13 +54,13 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<Task>(exception.Message, null, "500");
             }
         }
 
         public OperationResult<List<Shared.DomainModels.Task>> GetAllTasks()
         {
-            Logger.Instance.Info("some message");
             try
             {
                 List<Task> taskList = this.TaskRepository.List;
@@ -75,6 +75,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<List<Task>>(exception.Message, null, "500");
             }
         }
@@ -95,6 +96,7 @@
             }
             catch (Exception exception)
             {
+                Logger.Instance.Error(exception.Message, exception);
                 return CreateFailureResult<List<Task>>(exception.Message, null, "500");
             }
         }
@@ -114,7 +116,8 @@
             }
             catch (Exception exception)
             {
-               return CreateFailureResult<Task>(exception.Message, null, "500");
+                Logger.Instance.Error(exception.Message, exception);
+                return CreateFailureResult<Task>(exception.Message, null, "500");
             }
         }
     }
