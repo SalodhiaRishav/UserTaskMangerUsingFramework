@@ -13,14 +13,8 @@
     [TestFixture]
     public class TaskCategoryBusinessLogicTestcs
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-
-        [Test(Description = "Should return empty taskcategory list.")]
-        public void Should_return_empty_taskcategory_list()
+        [Test]
+        public void Can_return_empty_taskcategory_list()
         {
             //Arrange
             Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
@@ -36,20 +30,29 @@
             Assert.AreEqual("Empty List", actualResult.Message);
         }
 
-        [Test(Description = "Should return taskcategories.")]
-        public void Should_return_taskcategories()
+        [Test]
+        public void Can_return_taskcategories()
         {
             //Arrange
-            TaskCategory taskCategory = new TaskCategory()
-            {
-                Id = 1,
-                CategoryName = "Dot Net",
-                ModifiedOn = DateTime.Now,
-                CreatedOn = DateTime.Now,
-            };
-
             Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
-            List<TaskCategory> taskCategories = new List<TaskCategory>() { taskCategory };
+            List<TaskCategory> taskCategories = new List<TaskCategory>()
+            {
+                new TaskCategory
+                {
+                    Id = 1,
+                    CategoryName = "Dot Net",
+                    ModifiedOn = DateTime.Now,
+                    CreatedOn = DateTime.Now,
+                },
+                new TaskCategory
+                {
+                    Id = 2,
+                    CategoryName = "Vue.js",
+                    ModifiedOn = DateTime.Now,
+                    CreatedOn = DateTime.Now,
+                },
+
+            };
             mockObject.Setup(m => m.List).Returns(taskCategories);
             ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
             ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
@@ -58,11 +61,11 @@
             OperationResult<List<TaskCategory>> actualResult = taskCategoryBusinessLogic.GetAllTaskCategories();
 
             //assert          
-            Assert.AreEqual("Dot Net", actualResult.Data[0].CategoryName);
+            Assert.AreEqual(2, actualResult.Data.Count);
         }
 
-        [Test(Description = "Task Category with id 2 should not found")]
-        public void Should_not_return_taskcategory_with_id_2()
+        [Test]
+        public void Should_not_return_taskcategory_when_taskCategoryId_2_not_exist()
         {
             //Arrange
             Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
@@ -78,8 +81,8 @@
             Assert.AreEqual("TaskCategory Not Found", actualResult.Message);
         }
 
-        [Test(Description = "Task Category with id 1 should return")]
-        public void Should_return_taskcategory_with_id_1()
+        [Test]
+        public void Can_return_taskcategory_with_id_1()
         {
             //Arrange
             Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
@@ -101,8 +104,8 @@
             Assert.AreEqual("TaskCategory Has Found", actualResult.Message);
         }
 
-        [Test(Description = "New Task Category should be added successfully")]
-        public void Should_add_new_taskcategory()
+        [Test]
+        public void Can_add_new_taskcategory()
         {
             //Arrange
             Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
@@ -121,8 +124,8 @@
             Assert.AreEqual("TaskCategory Added Successfully", actualResult.Message);
         }
 
-        [Test(Description = "Adding invalid taskcategory")]
-        public void Should_return_invalid_data_message()
+        [Test]
+        public void Should_not_save_taskcategory_when_data_is_invalid()
         {
             //Arrange
             Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();

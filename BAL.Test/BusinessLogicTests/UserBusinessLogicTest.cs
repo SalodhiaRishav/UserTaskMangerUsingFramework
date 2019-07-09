@@ -14,14 +14,8 @@
     [TestFixture]
     public class UserBusinessLogicTest
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-
-        [Test(Description = "Check Login Method.")]
-        public void User_should_login()
+        [Test]
+        public void User_can_login()
         {
             //Arrange
             Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
@@ -47,8 +41,8 @@
             Assert.AreEqual("User Found", actualResult.Message);
         }
 
-        [Test(Description = "Check Login Method with invalid credentials.")]
-        public void User_should_not_login()
+        [Test]
+        public void User_should_not_login_when_invalid_credentials_given()
         {
             //Arrange   
             Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
@@ -64,8 +58,8 @@
             Assert.AreEqual("User Not Found", actualResult.Message);
         }
 
-        [Test(Description = "Checking Registeration with already existed email.")]
-        public void Should_return_email_already_exist()
+        [Test]
+        public void Can_return_email_already_exist_message()
         {
             //Arrange   
             Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
@@ -99,8 +93,8 @@
             Assert.AreEqual("Email already exists", actualResult.Message);
         }
 
-        [Test(Description ="checking with empty email")]
-        public void Should_return_invalid_data()
+        [Test]
+        public void Should_not_save_user_when_data_is_invalid()
         {
             //Arrange   
             Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
@@ -134,8 +128,8 @@
             Assert.AreEqual("Invalid Data", actualResult.Message);
         }
 
-        [Test(Description = "checking with valid user data")]
-        public void User_should_add()
+        [Test]
+        public void Can_user_add()
         {
             //Arrange   
             Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
