@@ -52,7 +52,7 @@
         {
             try
             {
-                List<User> userList = UserRepository.Find(fuser => fuser.Email == email && fuser.Password == password);
+                List<User> userList = UserRepository.Find(fuser => fuser.Email.Equals(email,StringComparison.OrdinalIgnoreCase) && fuser.Password.Equals(password,StringComparison.OrdinalIgnoreCase));
                 if (userList.Count != 0)
                 {
                     return CreateSuccessResult<User>("User Found", userList[0]);

@@ -2,17 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
-    using DAL.Repositories;
     using FluentValidation.Results;
     using Shared.DomainModels;
     using Shared.Interfaces.BusinessLogicInterfaces;
+    using Shared.Interfaces.RepositoryInterfaces;
     using Shared.Utils;
     using Shared.Validators;
 
     public class TaskBusinessLogic : BaseBusinessLogic, ITaskBusinessLogic
     {
-        private readonly TaskRepository TaskRepository;
-        public TaskBusinessLogic(TaskRepository taskRepository)
+        private readonly ITaskRepository TaskRepository;
+        public TaskBusinessLogic(ITaskRepository taskRepository)
         {
             TaskRepository = taskRepository;
         }

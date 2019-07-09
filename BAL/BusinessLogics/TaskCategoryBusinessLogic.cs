@@ -2,18 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
-    using DAL.Repositories;
     using FluentValidation.Results;
     using Shared.DomainModels;
     using Shared.Interfaces.BusinessLogicInterfaces;
+    using Shared.Interfaces.RepositoryInterfaces;
     using Shared.Utils;
     using Shared.Validators;
 
     public class TaskCategoryBusinessLogic : BaseBusinessLogic, ITaskCategoryBusinessLogic
     {
-        public TaskCategoryRepository TaskCategoryRepository;
+        public ITaskCategoryRepository TaskCategoryRepository;
 
-        public TaskCategoryBusinessLogic(TaskCategoryRepository taskCategoryRepository)
+        public TaskCategoryBusinessLogic(ITaskCategoryRepository taskCategoryRepository)
         {
             this.TaskCategoryRepository = taskCategoryRepository;
         }
