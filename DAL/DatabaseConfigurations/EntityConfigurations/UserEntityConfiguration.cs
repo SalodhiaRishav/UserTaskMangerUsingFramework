@@ -27,6 +27,10 @@
             this.Property(user => user.Password)
               .HasMaxLength(20)
               .IsRequired();
+
+            this.HasMany<Task>(user => user.Tasks)
+                .WithOptional()
+                .HasForeignKey(task => task.UserId);
         }
     }
 }

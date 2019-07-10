@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201907101308410_InitalCreate.Designer.cs">
       <DependentUpon>201907101308410_InitalCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907101701176_added fluent api.cs" />
+    <Compile Include="Migrations\201907101701176_added fluent api.Designer.cs">
+      <DependentUpon>201907101701176_added fluent api.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
@@ -81,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907101308410_InitalCreate.resx">
       <DependentUpon>201907101308410_InitalCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907101701176_added fluent api.resx">
+      <DependentUpon>201907101701176_added fluent api.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

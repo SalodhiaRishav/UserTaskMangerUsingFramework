@@ -46,7 +46,7 @@
             {
                 if (httpReq.HttpMethod == "OPTIONS")
                 {
-                    httpRes.AddHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+                    httpRes.AddHeader("Access-Control-Allow-Methods", "POST, GET,DELETE, OPTIONS");
                     httpRes.AddHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, X-ApiKey");
                     httpRes.EndRequest();
                 }

@@ -19,7 +19,7 @@
             return this.TaskBusinessLogic.AddTask(request.Task);
         }
 
-        public OperationResult<Task> Delete(DeleteTaskRequestDTO request)
+        public OperationResult<Task> Post(DeleteTaskRequestDTO request)
         {
             return this.TaskBusinessLogic.DeleteTask(request.Id);
         }
@@ -35,7 +35,7 @@
             return this.TaskBusinessLogic.GetAllTasks();
         }
 
-        public OperationResult<Task> Put(UpdateTaskRequestDTO request)
+        public OperationResult<Task> Post(UpdateTaskRequestDTO request)
         {
             return this.TaskBusinessLogic.UpdateTask(request.Task);
         }
