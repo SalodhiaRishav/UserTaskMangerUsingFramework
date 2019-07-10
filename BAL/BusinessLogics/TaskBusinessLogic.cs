@@ -12,9 +12,11 @@
     public class TaskBusinessLogic : BaseBusinessLogic, ITaskBusinessLogic
     {
         private readonly ITaskRepository TaskRepository;
+        //private readonly ITaskCategoryRepository TaskCategoryRepository;
         public TaskBusinessLogic(ITaskRepository taskRepository)
         {
             TaskRepository = taskRepository;
+            //TaskCategoryRepository = taskCategoryRepository;
         }
 
         public OperationResult<Task> AddTask(Task task)
@@ -84,7 +86,7 @@
         {
             try
             {
-                List<Task> tasks = this.TaskRepository.Find(task => task.UserID == userId);
+                List<Task> tasks = this.TaskRepository.GetUserTasks(userId);
                 if (tasks.Count == 0)
                 {
                     return CreateFailureResult<List<Task>>("Not any task found for this user", null, "404");

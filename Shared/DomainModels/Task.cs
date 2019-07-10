@@ -12,9 +12,9 @@
 
         public string UserStory { get; set; }
 
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
-        public int TaskCategoryID { get; set; }
+        public int TaskCategoryId { get; set; }
 
         public TaskCategory TaskCategory { get; set; }
     }

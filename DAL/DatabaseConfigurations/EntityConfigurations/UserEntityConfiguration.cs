@@ -27,10 +27,6 @@
             this.Property(user => user.Password)
               .HasMaxLength(20)
               .IsRequired();
-        
-            this.HasMany<Shared.DomainModels.Task>(user => user.Tasks)           
-            .WithOptional()
-            .HasForeignKey<int>(task => task.UserID);
         }
     }
 }

@@ -22,11 +22,6 @@
             this.Property(task => task.TaskDate)
                .IsRequired()
                .HasColumnType("datetime2");
-
-            this.HasRequired(task => task.TaskCategory)
-                .WithMany()
-                .HasForeignKey(task => task.TaskCategoryID);
-
         }
     }
 }

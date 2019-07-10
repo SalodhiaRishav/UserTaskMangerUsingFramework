@@ -35,6 +35,8 @@
             container.Register<IUserBusinessLogic>(new UserBusinessLogic(new UserRepository(new UserUnitOfWork())));
             container.Register<ITaskUnitOfWork>(new TaskUnitOfWork());
             container.Register<ITaskRepository>(new TaskRepository(new TaskUnitOfWork()));
+            //container.Register<ITaskBusinessLogic>(new TaskBusinessLogic(new TaskRepository(new TaskUnitOfWork()),
+            //    new TaskCategoryRepository(new TaskCategoryUnitOfWork())));
             container.Register<ITaskBusinessLogic>(new TaskBusinessLogic(new TaskRepository(new TaskUnitOfWork())));
             container.Register<ITaskCategoryUnitOfWork>(new TaskCategoryUnitOfWork());
             container.Register<ITaskCategoryRepository>(new TaskCategoryRepository(new TaskCategoryUnitOfWork()));
@@ -48,7 +50,6 @@
                     httpRes.AddHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, X-ApiKey");
                     httpRes.EndRequest();
                 }
-
             });
         }
     }
