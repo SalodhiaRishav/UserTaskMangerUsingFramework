@@ -7,7 +7,7 @@
     {
         public TaskCategoryValidator()
         {
-            RuleFor(taskCategory => taskCategory.CategoryName).Cascade(CascadeMode.StopOnFirstFailure).CheckNull().NotEmpty().Length(1, 50);
+            RuleFor(taskCategory => taskCategory.CategoryName).CheckNull().CheckEmpty().Length(1, 50);
         }
 
     }

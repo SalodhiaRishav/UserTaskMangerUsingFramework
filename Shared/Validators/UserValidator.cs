@@ -7,9 +7,9 @@
     {
         public UserValidator()
         {
-            RuleFor(user => user.FirstName).Cascade(CascadeMode.StopOnFirstFailure).CheckNull().NotEmpty().Length(1, 20);
-            RuleFor(user => user.LastName).Cascade(CascadeMode.StopOnFirstFailure).CheckNull().NotEmpty().Length(1, 20);
-            RuleFor(user => user.Password).Cascade(CascadeMode.StopOnFirstFailure).CheckNull().NotEmpty().Length(1, 20);
+            RuleFor(user => user.FirstName).CheckNull().CheckEmpty().Length(1, 20);
+            RuleFor(user => user.LastName).CheckNull().CheckEmpty().Length(1, 20);
+            RuleFor(user => user.Password).CheckNull().CheckEmpty().Length(1, 20);
             RuleFor(user => user.Email).EmailAddress();
         }
     }
