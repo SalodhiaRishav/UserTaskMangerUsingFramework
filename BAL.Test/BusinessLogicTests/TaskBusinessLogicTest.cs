@@ -19,12 +19,10 @@
         {
             //Arrange
             Mock<ITaskRepository> mockObject = new Mock<ITaskRepository>();
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
             List<Task> tasks = new List<Task>();
             mockObject.Setup(m => m.List).Returns(tasks);
             ITaskRepository taskRepository = mockObject.Object;
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<List<Task>> actualResult = taskBusinessLogic.GetAllTasks();
@@ -67,9 +65,7 @@
             };
             mockObject.Setup(m => m.List).Returns(tasks);
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<List<Task>> actualResult = taskBusinessLogic.GetAllTasks();
@@ -96,9 +92,7 @@
 
             mockObject.Setup(m => m.Add(newTask));
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<Task> actualResult = taskBusinessLogic.AddTask(newTask);
@@ -124,9 +118,7 @@
 
             mockObject.Setup(m => m.Add(newTask));
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<Task> actualResult = taskBusinessLogic.AddTask(newTask);
@@ -152,9 +144,7 @@
             mockObject.Setup(m => m.FindById(1)).Returns(task);
             mockObject.Setup(m => m.Delete(task));
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<Task> actualResult = taskBusinessLogic.DeleteTask(1);
@@ -173,9 +163,7 @@
             mockObject.Setup(m => m.FindById(taskId)).Returns(task);
             mockObject.Setup(m => m.Delete(task));
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<Task> actualResult = taskBusinessLogic.DeleteTask(taskId);
@@ -200,9 +188,7 @@
             };
             mockObject.Setup(m => m.Update(taskToUpdate));
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<Task> actualResult = taskBusinessLogic.UpdateTask(taskToUpdate);
@@ -228,9 +214,7 @@
             };
             mockObject.Setup(m => m.Update(taskToUpdate));
             ITaskRepository taskRepository = mockObject.Object;
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<Task> actualResult = taskBusinessLogic.UpdateTask(taskToUpdate);
@@ -273,10 +257,8 @@
             };
             int userId = 1;
             mockObject.Setup(m => m.Find(It.IsAny<Expression<Func<Task, bool>>>())).Returns(tasks);
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
             ITaskRepository taskRepository = mockObject.Object;
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<List<Task>> actualResult = taskBusinessLogic.GetTasksForUser(userId);
@@ -317,13 +299,11 @@
                     TimeSpent=6
                 }
             };
-            Mock<ITaskCategoryRepository> taskCategoryRepoMockObject = new Mock<ITaskCategoryRepository>();
             List<Task> resultTasks = new List<Task>();
             int userId = 2;
             mockObject.Setup(m => m.Find(It.IsAny<Expression<Func<Task, bool>>>())).Returns(resultTasks);
             ITaskRepository taskRepository = mockObject.Object;
-            ITaskCategoryRepository taskCategoryRepository = taskCategoryRepoMockObject.Object;
-            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository,taskCategoryRepository);
+            ITaskBusinessLogic taskBusinessLogic = new TaskBusinessLogic(taskRepository);
 
             //act
             OperationResult<List<Task>> actualResult = taskBusinessLogic.GetTasksForUser(userId);
