@@ -12,11 +12,9 @@
     public class TaskBusinessLogic : BaseBusinessLogic, ITaskBusinessLogic
     {
         private readonly ITaskRepository TaskRepository;
-        //private readonly ITaskCategoryRepository TaskCategoryRepository;
         public TaskBusinessLogic(ITaskRepository taskRepository)
         {
             TaskRepository = taskRepository;
-            //TaskCategoryRepository = taskCategoryRepository;
         }
 
         public OperationResult<Task> AddTask(Task task)

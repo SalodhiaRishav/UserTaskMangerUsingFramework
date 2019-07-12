@@ -14,11 +14,21 @@
     [TestFixture]
     public class UserBusinessLogicTest
     {
+        Mock<IUserRepository> MockObject { get; set; }
+        IUserBusinessLogic UserBusinessLogic { get; set; }
+
+        [SetUp]
+        public void Initiaizer()
+        {
+            MockObject = new Mock<IUserRepository>();
+            IUserRepository userRepository = MockObject.Object;
+            UserBusinessLogic = new UserBusinessLogic(userRepository);
+        }
+
         [Test]
         public void User_can_login()
         {
             //Arrange
-            Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
             User user = new User()
             {
                 Email = "rishav@gmail.com",
@@ -30,12 +40,11 @@
                 Id = 1
             };
             List<User> userList = new List<User> { user };
-            mockObject.Setup(m => m.Find(It.IsAny<Expression<System.Func<User, bool>>>())).Returns(userList);
-            IUserRepository userRepository = mockObject.Object;
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic(userRepository);
+            MockObject.Setup(m => m.Find(It.IsAny<Expression<System.Func<User, bool>>>())).Returns(userList);
+            
 
             //act
-            OperationResult<User> actualResult = userBusinessLogic.LoginUser("rishav@gmail.com", "Lkjh@4321");
+            OperationResult<User> actualResult = UserBusinessLogic.LoginUser("rishav@gmail.com", "Lkjh@4321");
 
             //assert
             Assert.AreEqual("User Found", actualResult.Message);
@@ -62,7 +71,6 @@
         public void Can_return_email_already_exist_message()
         {
             //Arrange   
-            Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
             User user = new User()
             {
                 Email = "rishav@gmail.com",
@@ -74,7 +82,7 @@
                 Id = 1
             };
             List<User> userList = new List<User> { user };
-            mockObject.SetupGet(m => m.List).Returns(userList);
+            MockObject.SetupGet(m => m.List).Returns(userList);
             User newUser = new User()
             {
                 Email = "rishav@gmail.com",
@@ -82,12 +90,10 @@
                 FirstName = "Rishav",
                 LastName = "Salodhia",
             };
-            mockObject.Setup(m => m.Add(It.IsAny<User>()));
-            IUserRepository userRepository = mockObject.Object;
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic(userRepository);
+            MockObject.Setup(m => m.Add(It.IsAny<User>()));
 
             //act
-            OperationResult<User> actualResult = userBusinessLogic.AddUser(newUser);
+            OperationResult<User> actualResult = UserBusinessLogic.AddUser(newUser);
 
             //assert
             Assert.AreEqual("Email already exists", actualResult.Message);
@@ -97,7 +103,6 @@
         public void Should_not_save_user_when_data_is_invalid()
         {
             //Arrange   
-            Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
             User user = new User()
             {
                 Email = "rishav@gmail.com",
@@ -109,7 +114,7 @@
                 Id = 1
             };
             List<User> userList = new List<User> { user };
-            mockObject.SetupGet(m => m.List).Returns(userList);
+            MockObject.SetupGet(m => m.List).Returns(userList);
             User newUser = new User()
             {
                 Email = "",
@@ -117,12 +122,10 @@
                 FirstName = "Rishav",
                 LastName = "Salodhia",
             };
-            mockObject.Setup(m => m.Add(It.IsAny<User>()));
-            IUserRepository userRepository = mockObject.Object;
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic(userRepository);
-
+            MockObject.Setup(m => m.Add(It.IsAny<User>()));
+            
             //act
-            OperationResult<User> actualResult = userBusinessLogic.AddUser(newUser);
+            OperationResult<User> actualResult = UserBusinessLogic.AddUser(newUser);
 
             //assert
             Assert.AreEqual("Invalid Data", actualResult.Message);
@@ -132,7 +135,6 @@
         public void Can_user_add()
         {
             //Arrange   
-            Mock<IUserRepository> mockObject = new Mock<IUserRepository>();
             User user = new User()
             {
                 Email = "rishav@gmail.com",
@@ -144,7 +146,7 @@
                 Id = 1
             };
             List<User> userList = new List<User> { user };
-            mockObject.SetupGet(m => m.List).Returns(userList);
+            MockObject.SetupGet(m => m.List).Returns(userList);
             User newUser = new User()
             {
                 Email = "rishavsalodhia@gmail.com",
@@ -152,12 +154,10 @@
                 FirstName = "Rishav",
                 LastName = "Salodhia",
             };
-            mockObject.Setup(m => m.Add(It.IsAny<User>()));
-            IUserRepository userRepository = mockObject.Object;
-            IUserBusinessLogic userBusinessLogic = new UserBusinessLogic(userRepository);
-
+            MockObject.Setup(m => m.Add(It.IsAny<User>()));
+           
             //act
-            OperationResult<User> actualResult = userBusinessLogic.AddUser(newUser);
+            OperationResult<User> actualResult = UserBusinessLogic.AddUser(newUser);
 
             //assert
             Assert.AreEqual("Added successfully", actualResult.Message);

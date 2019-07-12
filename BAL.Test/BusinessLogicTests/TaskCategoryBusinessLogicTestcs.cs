@@ -13,18 +13,27 @@
     [TestFixture]
     public class TaskCategoryBusinessLogicTestcs
     {
+        Mock<ITaskCategoryRepository> MockObject { get; set; }
+        ITaskCategoryBusinessLogic TaskCategoryBusinessLogic { get; set; }
+
+       [SetUp]
+        public void Initializer()
+        {
+            MockObject = new Mock<ITaskCategoryRepository>();
+            ITaskCategoryRepository taskCategoryRepository = MockObject.Object;
+            TaskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
+        }
+
         [Test]
         public void Can_return_empty_taskcategory_list()
         {
             //Arrange
-            Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
+           
             List<TaskCategory> taskCategories = new List<TaskCategory>();
-            mockObject.Setup(m => m.List).Returns(taskCategories);
-            ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
-            ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
+            MockObject.Setup(m => m.List).Returns(taskCategories);
 
             //act
-            OperationResult<List<TaskCategory>> actualResult = taskCategoryBusinessLogic.GetAllTaskCategories();
+            OperationResult<List<TaskCategory>> actualResult = TaskCategoryBusinessLogic.GetAllTaskCategories();
 
             //assert
             Assert.AreEqual("Empty List", actualResult.Message);
@@ -34,7 +43,6 @@
         public void Can_return_taskcategories()
         {
             //Arrange
-            Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
             List<TaskCategory> taskCategories = new List<TaskCategory>()
             {
                 new TaskCategory
@@ -53,12 +61,10 @@
                 },
 
             };
-            mockObject.Setup(m => m.List).Returns(taskCategories);
-            ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
-            ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
-
+            MockObject.Setup(m => m.List).Returns(taskCategories);
+          
             //act
-            OperationResult<List<TaskCategory>> actualResult = taskCategoryBusinessLogic.GetAllTaskCategories();
+            OperationResult<List<TaskCategory>> actualResult = TaskCategoryBusinessLogic.GetAllTaskCategories();
 
             //assert          
             Assert.AreEqual(2, actualResult.Data.Count);
@@ -68,14 +74,11 @@
         public void Should_not_return_taskcategory_when_taskCategoryId_2_not_exist()
         {
             //Arrange
-            Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
             TaskCategory taskCategory = null;
-            mockObject.Setup(m => m.FindById(2)).Returns(taskCategory);
-            ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
-            ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
+            MockObject.Setup(m => m.FindById(2)).Returns(taskCategory);
 
             //act
-            OperationResult<TaskCategory> actualResult = taskCategoryBusinessLogic.GetTaskCategoryById(2);
+            OperationResult<TaskCategory> actualResult = TaskCategoryBusinessLogic.GetTaskCategoryById(2);
 
             //assert          
             Assert.AreEqual("TaskCategory Not Found", actualResult.Message);
@@ -85,7 +88,6 @@
         public void Can_return_taskcategory_with_id_1()
         {
             //Arrange
-            Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
             TaskCategory taskCategory = new TaskCategory()
             {
                 Id = 1,
@@ -93,12 +95,10 @@
                 ModifiedOn = DateTime.Now,
                 CreatedOn = DateTime.Now
             };
-            mockObject.Setup(m => m.FindById(1)).Returns(taskCategory);
-            ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
-            ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
-
+            MockObject.Setup(m => m.FindById(1)).Returns(taskCategory);
+           
             //act
-            OperationResult<TaskCategory> actualResult = taskCategoryBusinessLogic.GetTaskCategoryById(1);
+            OperationResult<TaskCategory> actualResult = TaskCategoryBusinessLogic.GetTaskCategoryById(1);
 
             //assert          
             Assert.AreEqual("TaskCategory Has Found", actualResult.Message);
@@ -108,17 +108,14 @@
         public void Can_add_new_taskcategory()
         {
             //Arrange
-            Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
             TaskCategory taskCategory = new TaskCategory()
             {
                 CategoryName = "Vue.JS",
             };
-            mockObject.Setup(m => m.Add(It.IsAny<TaskCategory>()));
-            ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
-            ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
+            MockObject.Setup(m => m.Add(It.IsAny<TaskCategory>()));
 
             //act
-            OperationResult<TaskCategory> actualResult = taskCategoryBusinessLogic.AddTaskCategory(taskCategory);
+            OperationResult<TaskCategory> actualResult = TaskCategoryBusinessLogic.AddTaskCategory(taskCategory);
 
             //assert          
             Assert.AreEqual("TaskCategory Added Successfully", actualResult.Message);
@@ -128,17 +125,14 @@
         public void Should_not_save_taskcategory_when_data_is_invalid()
         {
             //Arrange
-            Mock<ITaskCategoryRepository> mockObject = new Mock<ITaskCategoryRepository>();
             TaskCategory taskCategory = new TaskCategory()
             {
                 CategoryName = "",
             };
-            mockObject.Setup(m => m.Add(It.IsAny<TaskCategory>()));
-            ITaskCategoryRepository taskCategoryRepository = mockObject.Object;
-            ITaskCategoryBusinessLogic taskCategoryBusinessLogic = new TaskCategoryBusinessLogic(taskCategoryRepository);
+            MockObject.Setup(m => m.Add(It.IsAny<TaskCategory>()));
 
             //act
-            OperationResult<TaskCategory> actualResult = taskCategoryBusinessLogic.AddTaskCategory(taskCategory);
+            OperationResult<TaskCategory> actualResult = TaskCategoryBusinessLogic.AddTaskCategory(taskCategory);
 
             //assert          
             Assert.AreEqual("Invalid Data", actualResult.Message);
